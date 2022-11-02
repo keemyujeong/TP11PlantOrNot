@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            true // 리턴 값
+            true // 리턴 값을 
 
         }
 
