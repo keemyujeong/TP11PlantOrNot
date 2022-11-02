@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:civ_border_color="@color/branch"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/profle"
+            android:layout_centerHorizontal="true"/>
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="nickname"
+            android:gravity="center"
+            android:inputType="text"
+            android:lines="1"
+            android:ems="8"
+            android:layout_below="@+id/civ"
+            />
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작하기"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/suncheon"
+        android:backgroundTint="@color/leap"
+        android:visibility="invisible"
+        />
+
+
+
+
+
+</RelativeLayout>

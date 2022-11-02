@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/menu_plant"
+        android:checkableBehavior="single">
+        <item android:id="@+id/my_plant"
+            android:title="내 관심 작물 관리"
+            />
+    </group>
+    <group android:id="@+id/menu_post"
+        android:checkableBehavior="single">
+        <item android:id="@+id/my_post"
+            android:title="내가 쓴 글 관리"
+            />
+    </group>
+    <group android:id="@+id/menu_location"
+        android:checkableBehavior="single">
+        <item android:id="@+id/my_location"
+            android:title="내 위치 관리"
+            />
+    </group>
+
+
+</menu>

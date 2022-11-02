@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PlantOrNot</string>
+
+    <string name="drawer_open">열렸다</string>
+    <string name="drawer_close">닫힘</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+</resources>
