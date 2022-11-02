@@ -25,6 +25,8 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerView.adapter = HomeAdapter(activity, items)
+
         loadData()
     }
 

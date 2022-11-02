@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
-    app:cardElevation="16dp"
+    app:cardElevation="8dp"
     android:layout_margin="16dp"
     app:cardBackgroundColor="@color/leap">
 
@@ -23,14 +23,16 @@
             android:fontFamily="@font/suncheon"
             android:layout_centerHorizontal="true"
             />
+
         <TextView
             android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/suncheon"
             android:text="dummy data dummy data dummy data dummy data dummy data dummy data dummy data "
-            android:layout_below="@+id/tv_title"
-            android:layout_marginTop="8dp"/>
+            android:gravity="center"/>
 
 
 
