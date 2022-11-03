@@ -79,6 +79,7 @@
         android:textSize="12sp"
         android:fontFamily="@font/suncheon"
         android:paddingTop="16dp"
+        android:paddingLeft="8dp"
         android:paddingBottom="4dp"/>
 
 
@@ -88,7 +89,7 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        android:backgroundTint="@color/background"/>
+        />
 
 
 

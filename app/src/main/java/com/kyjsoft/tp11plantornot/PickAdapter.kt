@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,16 @@ class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding : PickRecyclerItemBinding = PickRecyclerItemBinding.bind(itemView)
+
+        init {
+            itemView.setOnClickListener {
+                val intent: Intent = Intent(context, ProfileActivity::class.java)
+                context.startActivity(intent)
+
+
+
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -27,4 +38,6 @@ class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>
     }
 
     override fun getItemCount(): Int = items.size
+
+
 }

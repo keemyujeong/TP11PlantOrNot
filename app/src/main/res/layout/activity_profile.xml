@@ -47,7 +47,6 @@
         android:layout_margin="16dp"
         android:fontFamily="@font/suncheon"
         android:backgroundTint="@color/leap"
-        android:visibility="invisible"
         />
 
 
