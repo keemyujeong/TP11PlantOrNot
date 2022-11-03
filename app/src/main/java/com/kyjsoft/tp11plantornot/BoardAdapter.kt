@@ -11,10 +11,6 @@ import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
 
 class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerItem>) : RecyclerView.Adapter<BoardAdapter.VH>() {
 
-    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val binding : BoardRecyclerItemBinding = BoardRecyclerItemBinding.bind(itemView)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         var itemView : View = LayoutInflater.from(context).inflate(R.layout.board_recycler_item, parent, false)
         return VH(itemView)
@@ -30,6 +26,15 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
     }
 
     override fun getItemCount(): Int = items.size
+
+    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val binding : BoardRecyclerItemBinding = BoardRecyclerItemBinding.bind(itemView)
+
+//        init {
+//            itemView.setOnClickListener { TODO }
+//        }
+
+    }
 
 
 }

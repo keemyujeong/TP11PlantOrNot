@@ -30,10 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/suncheon"
+            android:gravity="center"
             android:text="dummy data dummy data dummy data dummy data dummy data dummy data dummy data "
-            android:textSize="12sp"
-            android:gravity="center"/>
+            android:textSize="12sp" />
 
 
 
