@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
 import com.kyjsoft.tp11plantornot.databinding.FragmentHomeBinding
@@ -12,6 +13,7 @@ class HomeFragment: Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     var items: MutableList<HomeRecyclerItem> = mutableListOf()
+    lateinit var drawerToggle: ActionBarDrawerToggle
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +26,7 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.recyclerView.adapter = HomeAdapter(activity, items)
 

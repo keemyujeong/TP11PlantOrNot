@@ -18,8 +18,9 @@ class MapActivity : AppCompatActivity() {
     }
 
     fun clickBtn(){
+
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
         finish()
     }
-}
+};

@@ -7,15 +7,17 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/background"/>
+        android:background="@color/background" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+<!--        TODO homefragment에 drowerlayout 옮기기 -> toolbar 코드도 옮기셈  -->
 
         <RelativeLayout
             android:layout_width="match_parent"

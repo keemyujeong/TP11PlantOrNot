@@ -14,12 +14,12 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:civ_border_color="@color/branch"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
             android:src="@drawable/profle"
-            android:layout_centerHorizontal="true"/>
+            app:civ_border_color="@color/branch" />
         <EditText
             android:id="@+id/et"
             android:layout_width="wrap_content"

@@ -9,6 +9,12 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background" />
+
     <RelativeLayout
         android:id="@+id/reletive_weather_total"
         android:layout_width="wrap_content"
