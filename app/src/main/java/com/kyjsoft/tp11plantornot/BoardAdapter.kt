@@ -30,9 +30,9 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding : BoardRecyclerItemBinding = BoardRecyclerItemBinding.bind(itemView)
 
-//        init {
-//            itemView.setOnClickListener { TODO }
-//        }
+        init { // class 영역에서 함수 말고 실행문을 쓸 때 초기화 블럭 안에 써라.
+            binding.like.setOnClickListener {  }
+        }
 
     }
 

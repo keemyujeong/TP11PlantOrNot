@@ -11,6 +11,7 @@ import com.kyjsoft.tp11plantornot.databinding.FragmentBugBinding
 class BugFragment: Fragment() {
 
     lateinit var binding: FragmentBugBinding
+    var items : MutableList<BugRecyclerItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,5 +20,27 @@ class BugFragment: Fragment() {
     ): View? {
         binding = FragmentBugBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerView.adapter = BugAdapter(requireContext(),items)
+
+        items.add(BugRecyclerItem("감자","벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레벌레벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레벌레",""))
+        items.add(BugRecyclerItem("감자","벌레",""))
+
     }
 }
