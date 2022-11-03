@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_board.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/bg_et.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/bg_pick_item.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1575" />

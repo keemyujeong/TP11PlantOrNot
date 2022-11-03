@@ -32,6 +32,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/suncheon"
             android:text="dummy data dummy data dummy data dummy data dummy data dummy data dummy data "
+            android:textSize="12sp"
             android:gravity="center"/>
 
 
