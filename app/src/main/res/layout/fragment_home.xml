@@ -236,9 +236,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/tv_info"
+                android:padding="24dp"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:spanCount="2"
-                android:padding="24dp"/>
+                app:spanCount="2" />
 
 
         </RelativeLayout>

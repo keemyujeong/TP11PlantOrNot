@@ -19,9 +19,11 @@ class PickActivity : AppCompatActivity() {
         loadData()
 
 
+    }
 
-
-
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 
     fun loadData() {
