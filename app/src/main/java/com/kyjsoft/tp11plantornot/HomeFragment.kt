@@ -54,7 +54,6 @@ class HomeFragment: Fragment() {
         startActivity(intent)
     }
 
-
     fun clickMyPost(){
         val intent : Intent = Intent(requireContext(), MyPostActivity::class.java)
         startActivity(intent)

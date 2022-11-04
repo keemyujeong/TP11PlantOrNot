@@ -8,11 +8,7 @@
     tools:context=".HomeFragment"
     >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/background" />
+
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_id"
@@ -23,6 +19,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/background" />
 
             <RelativeLayout
                 android:id="@+id/reletive_weather_total"
