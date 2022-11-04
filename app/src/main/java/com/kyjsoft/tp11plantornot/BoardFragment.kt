@@ -1,5 +1,6 @@
 package com.kyjsoft.tp11plantornot
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,11 @@ class BoardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerView.adapter = BoardAdapter(requireContext(), items)
+
+        binding.fab.setOnClickListener{
+            val intent : Intent = Intent(requireContext(), EditActivity::class.java)
+            startActivity(intent)
+        }
 
         loadData()
 

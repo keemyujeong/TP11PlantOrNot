@@ -21,21 +21,6 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment())
 
 
-        drawerToggle = ActionBarDrawerToggle(this, binding.drawerId, binding.toolbar, R.string.drawer_open, R.string.drawer_close)
-        binding.drawerId.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-
-        binding.nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.menu_selectplant -> clickSelectPlant()
-                R.id.menu_post -> clickMyPost()
-                R.id.menu_location -> clickLocation()
-            }
-            binding.drawerId.closeDrawer(binding.nav)
-            false
-
-        } )
-
         binding.bnv.setOnItemSelectedListener {
 
             when(it.itemId){
@@ -47,20 +32,6 @@ class MainActivity : AppCompatActivity() {
             }
             true // 리턴 값을
         }
-    }
-    fun clickSelectPlant(){
-        val intent : Intent = Intent(this, PickActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun clickMyPost(){
-        val intent : Intent = Intent(this, MyPostActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun clickLocation(){
-        val intent : Intent = Intent(this, MapActivity::class.java)
-        startActivity(intent)
     }
 
     fun replaceFragment(fragment: Fragment){

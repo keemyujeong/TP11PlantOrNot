@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     tools:context=".HomeFragment"
-    android:orientation="vertical"
-    android:padding="24dp">
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,217 +14,252 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/background" />
 
-    <RelativeLayout
-        android:id="@+id/reletive_weather_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        >
-
-
-        <RelativeLayout
-            android:id="@+id/reletive_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/suncheon"
-                android:text="지역명"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_location"
-                android:fontFamily="@font/suncheon"
-                android:padding="3dp"
-                android:text="의"
-                android:textColor="@color/branch"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_location"
-                android:fontFamily="@font/suncheon"
-                android:padding="3dp"
-                android:text="오늘 날씨"
-                android:textColor="@color/branch"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/reletive_weather"
-            android:padding="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/reletive_weather">
-
-            <TextView
-                android:id="@+id/tv_temp1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/suncheon"
-                android:padding="3dp"
-                android:text="최고 기온 : "
-                android:textColor="@color/branch"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_temp2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_temp1"
-                android:fontFamily="@font/suncheon"
-                android:padding="3dp"
-                android:text="최저 기온 : "
-                android:textColor="@color/branch"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_high_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_temp1"
-                android:fontFamily="@font/suncheon"
-                android:padding="2dp"
-                android:text="26"
-                android:textColor="@color/branch"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_high_temp"
-                android:fontFamily="@font/suncheon"
-                android:padding="2dp"
-                android:text="도"
-                android:textColor="@color/branch"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_low_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tv_temp2"
-                android:layout_toRightOf="@+id/tv_temp2"
-                android:fontFamily="@font/suncheon"
-                android:padding="2dp"
-                android:text="19"
-                android:textColor="@color/branch"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_temp2"
-                android:layout_toRightOf="@+id/tv_low_temp"
-                android:fontFamily="@font/suncheon"
-                android:padding="2dp"
-                android:text="도"
-                android:textColor="@color/branch"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:id="@+id/today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reletive_weather_total"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="오늘 "
-            android:textColor="@color/branch"
-            android:textSize="18sp"
-            android:fontFamily="@font/suncheon"
-            />
-
-        <TextView
-            android:id="@+id/my_plant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="관심작물"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/suncheon"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="을 심기 좋은 날입니다!"
-            android:textColor="@color/branch"
-            android:textSize="18sp"
-            android:fontFamily="@font/suncheon"
-            />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/tv_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/today"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
-
-        <TextView
-            android:id="@+id/my_plant2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/suncheon"
-            android:padding="3dp"
-            android:text="관심작물"
-            android:textColor="@color/branch"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/my_plant2"
-            android:fontFamily="@font/suncheon"
-            android:padding="3dp"
-            android:text="농작업정보"
-            android:textColor="@color/branch"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_info"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:spanCount="2" />
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/reletive_weather_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/reletive_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suncheon"
+                        android:text="지역명"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_location"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="3dp"
+                        android:text="의"
+                        android:textColor="@color/branch"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_location"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="3dp"
+                        android:text="오늘 날씨"
+                        android:textColor="@color/branch"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/reletive_weather"
+                    android:padding="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/reletive_weather">
+
+                    <TextView
+                        android:id="@+id/tv_temp1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="3dp"
+                        android:text="최고 기온 : "
+                        android:textColor="@color/branch"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_temp2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_temp1"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="3dp"
+                        android:text="최저 기온 : "
+                        android:textColor="@color/branch"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_high_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_temp1"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="2dp"
+                        android:text="26"
+                        android:textColor="@color/branch"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_high_temp"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="2dp"
+                        android:text="도"
+                        android:textColor="@color/branch"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_low_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tv_temp2"
+                        android:layout_toRightOf="@+id/tv_temp2"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="2dp"
+                        android:text="19"
+                        android:textColor="@color/branch"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_temp2"
+                        android:layout_toRightOf="@+id/tv_low_temp"
+                        android:fontFamily="@font/suncheon"
+                        android:padding="2dp"
+                        android:text="도"
+                        android:textColor="@color/branch"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/reletive_weather_total"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오늘 "
+                    android:textColor="@color/branch"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/suncheon"
+                    />
+
+                <TextView
+                    android:id="@+id/my_plant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="관심작물"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/suncheon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="을 심기 좋은 날입니다!"
+                    android:textColor="@color/branch"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/suncheon"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/today"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/my_plant2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/suncheon"
+                    android:padding="3dp"
+                    android:text="관심작물"
+                    android:textColor="@color/branch"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/my_plant2"
+                    android:fontFamily="@font/suncheon"
+                    android:padding="3dp"
+                    android:text="농작업정보"
+                    android:textColor="@color/branch"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_info"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="2"
+                android:padding="24dp"/>
+
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav"
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/nav"
+            app:headerLayout="@layout/drawer_header"
+            app:itemTextAppearance="@style/Font"
+            />
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
+
+
 
 
 

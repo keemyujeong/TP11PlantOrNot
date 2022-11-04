@@ -12,59 +12,44 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/background" />
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_id"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-<!--        TODO homefragment에 drowerlayout 옮기기 -> toolbar 코드도 옮기셈  -->
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/bnv"
-                android:layout_marginBottom="-1dp" />
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bnv"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/background"
-                app:itemIconSize="30dp"
-                app:itemIconTint="@color/bnv_item"
-                app:itemPaddingTop="8dp"
-                app:itemRippleColor="@color/background"
-                app:itemTextColor="@color/bnv_item"
-                app:labelVisibilityMode="unlabeled"
-                app:menu="@menu/bnv" />
-
-
-
-
-
-        </RelativeLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav"
-            android:layout_width="210dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/nav"
-            app:headerLayout="@layout/drawer_header"
-            app:itemTextAppearance="@style/Font"
-            />
+            android:layout_above="@+id/bnv"
+            android:layout_marginBottom="-1dp" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/background"
+            app:itemIconSize="30dp"
+            app:itemIconTint="@color/bnv_item"
+            app:itemPaddingTop="8dp"
+            app:itemRippleColor="@color/background"
+            app:itemTextColor="@color/bnv_item"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bnv" />
 
 
 
 
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
 
 
 
