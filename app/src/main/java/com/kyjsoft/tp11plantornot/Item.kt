@@ -5,10 +5,9 @@ data class PlantName(
 )
 
 // 기상청
-data class Weather(val response: Response)
-data class Response(val body: Body)
-data class Body(val items : Items)
-data class Items(val item : List<Item>)
+data class WeatherResponse(val body: Body)
+data class Body(val dataType : String, val items : Items, val totalCount : Int)
+data class Items(val item : Item)
 
 data class Item(
     var category : String,

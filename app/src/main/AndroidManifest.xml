@@ -16,6 +16,7 @@
         android:theme="@style/Theme.TP11PlantOrNot"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".EditActivity"
             android:exported="false" />

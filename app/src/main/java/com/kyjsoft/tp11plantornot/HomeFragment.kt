@@ -2,16 +2,23 @@ package com.kyjsoft.tp11plantornot
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
 import com.kyjsoft.tp11plantornot.databinding.FragmentHomeBinding
+import java.text.SimpleDateFormat
+import java.util.*
+import com.kyjsoft.tp11plantornot.WeatherResponse
+import retrofit2.*
 
 class HomeFragment: Fragment() {
+
 
     lateinit var binding: FragmentHomeBinding
     var items: MutableList<HomeRecyclerItem> = mutableListOf()
@@ -29,6 +36,7 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 메뉴 토글
         drawerToggle = ActionBarDrawerToggle(requireActivity(), binding.drawerId, binding.toolbar, R.string.drawer_open, R.string.drawer_close)
         drawerToggle.syncState()
         binding.drawerId.addDrawerListener(drawerToggle)
@@ -41,12 +49,55 @@ class HomeFragment: Fragment() {
             }
             binding.drawerId.closeDrawer(binding.nav)
             false
-
         } )
 
+        // 홈 fragment 리사이클러 adapter
         binding.recyclerView.adapter = HomeAdapter(activity, items)
-
         loadData()
+
+
+
+        // 날씨 적용
+        val weatherApiKey = "4wlFPuoi69Pc78kZpfF7GpieaLhqRkeSrKZs9jk5ZqbKSSh4vfl2VXk36YbHSOSipfsuVFbBZk9wVLg+ubgvHw=="
+        var retrofit : Retrofit = RetrofitHelper.getInstance("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/")
+        retrofit.create(RetrofitService::class.java).getWeatherInfo(
+            weatherApiKey,
+            300, // 값이 500개는 되어야 최저 기온이랑, 최고 기온 받을 수 있다고 함.
+            1,
+            "JSON",
+            SimpleDateFormat("yyyyMMdd").format(Date()),
+            "0200",
+            56,
+            106
+        ).enqueue( object : Callback<WeatherResponse>{
+
+            override fun onResponse(
+                call: Call<WeatherResponse>,
+                response: Response<WeatherResponse>
+            ) {
+                val result: WeatherResponse? = response.body()
+                result?.body?.items?.item?.let {
+                    Log.i("분류", it.category)
+                    Log.i("VALUE", it.fcstValue)
+                }
+            }
+
+            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                Log.i("TAG", "실패 : ${t.message}")
+                AlertDialog.Builder(requireContext()).setMessage("실패 : + ${t.message}").show()
+            }
+
+
+
+
+        })
+
+
+
+
+
+
+
 
 
 
