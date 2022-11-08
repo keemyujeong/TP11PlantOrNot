@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -60,6 +61,35 @@ class HomeFragment: Fragment() {
         // 날씨 적용
         val weatherApiKey = "4wlFPuoi69Pc78kZpfF7GpieaLhqRkeSrKZs9jk5ZqbKSSh4vfl2VXk36YbHSOSipfsuVFbBZk9wVLg+ubgvHw=="
         var retrofit : Retrofit = RetrofitHelper.getInstance("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/")
+
+        // scalars JSON파싱
+//        retrofit.create(RetrofitService::class.java).dataToString(
+//            weatherApiKey,
+//            300, // 값이 500개는 되어야 최저 기온이랑, 최고 기온 받을 수 있다고 함.
+//            1,
+//            "JSON",
+//            SimpleDateFormat("yyyyMMdd").format(Date()),
+//            "0200",
+//            56,
+//            106
+//        ).enqueue( object : Callback<String>{
+//
+//            override fun onResponse(
+//                call: Call<String>,
+//                response: Response<String>
+//            ) {
+//                val result: String? = response.body()
+//                    Log.i("TAG", result.toString())
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                AlertDialog.Builder(requireContext()).setMessage("실패 : + ${t.message}").show()
+//            }
+//        })
+
+
+
+
         retrofit.create(RetrofitService::class.java).getWeatherInfo(
             weatherApiKey,
             300, // 값이 500개는 되어야 최저 기온이랑, 최고 기온 받을 수 있다고 함.
@@ -76,9 +106,21 @@ class HomeFragment: Fragment() {
                 response: Response<WeatherResponse>
             ) {
                 val result: WeatherResponse? = response.body()
-                result?.body?.items?.item?.let {
-                    Log.i("분류", it.category)
-                    Log.i("VALUE", it.fcstValue)
+                result?.response?.body?.items?.item?.let {
+//                    for(i in 0..it.totalCount){
+//                        when(it.items.item[i].category){
+//                            "TMN"-> binding.tvLowTemp.text = it.items.item[i].fcstValue
+//                            "TMX"-> binding.tvHighTemp.text = it.items.item[i].fcstValue
+//                        }
+//                    }
+                    it.forEach { item ->
+                        when(item.category){
+                            "TMN"-> binding.tvLowTemp.text = item.fcstValue
+                            "TMX"-> binding.tvHighTemp.text = item.fcstValue
+                        }
+                    }
+
+//                    Toast.makeText(requireContext(), result?.response?.body?.totalCount.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
 

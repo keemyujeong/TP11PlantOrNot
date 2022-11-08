@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/suncheon"
-                        android:text="지역명"
+                        android:text="금마면"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -111,7 +111,7 @@
                         android:layout_toRightOf="@+id/tv_temp1"
                         android:fontFamily="@font/suncheon"
                         android:padding="2dp"
-                        android:text="26"
+                        android:text="0"
                         android:textColor="@color/branch"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -134,7 +134,7 @@
                         android:layout_toRightOf="@+id/tv_temp2"
                         android:fontFamily="@font/suncheon"
                         android:padding="2dp"
-                        android:text="19"
+                        android:text="0"
                         android:textColor="@color/branch"
                         android:textSize="12sp"
                         android:textStyle="bold" />
