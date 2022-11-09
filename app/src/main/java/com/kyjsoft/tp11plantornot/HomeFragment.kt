@@ -62,7 +62,7 @@ class HomeFragment: Fragment() {
         val weatherApiKey = "4wlFPuoi69Pc78kZpfF7GpieaLhqRkeSrKZs9jk5ZqbKSSh4vfl2VXk36YbHSOSipfsuVFbBZk9wVLg+ubgvHw=="
         var retrofit : Retrofit = RetrofitHelper.getInstance("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/")
 
-        // scalars JSON파싱
+        // scalars 파싱
 //        retrofit.create(RetrofitService::class.java).dataToString(
 //            weatherApiKey,
 //            300, // 값이 500개는 되어야 최저 기온이랑, 최고 기온 받을 수 있다고 함.
@@ -130,18 +130,7 @@ class HomeFragment: Fragment() {
             }
 
 
-
-
         })
-
-
-
-
-
-
-
-
-
 
 
     }

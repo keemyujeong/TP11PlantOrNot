@@ -1,5 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
+import androidx.annotation.XmlRes
+
 data class PlantName(
     var cntntsSj : String
 )
@@ -14,5 +16,15 @@ data class Item(
     var category : String,
     var fcstValue : String
 )
+
+
+// 병충해
+
+
+
+
+
+
+
 
 
