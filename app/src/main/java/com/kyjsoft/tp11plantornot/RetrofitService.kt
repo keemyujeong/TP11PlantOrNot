@@ -18,7 +18,6 @@ interface RetrofitService {
         @Query("base_time") base_time: String,
         @Query("nx") nx: Int,
         @Query("ny") ny: Int
-
     ) : Call<String>
 
     @GET("getVilageFcst")

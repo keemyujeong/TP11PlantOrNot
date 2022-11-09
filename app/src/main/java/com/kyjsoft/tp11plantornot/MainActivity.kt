@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         replaceFragment(HomeFragment())
 
-
         binding.bnv.setOnItemSelectedListener {
 
             when(it.itemId){
