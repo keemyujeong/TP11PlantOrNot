@@ -33,7 +33,7 @@ class BugFragment: Fragment() {
 
         binding.recyclerView.adapter = BugAdapter(requireContext(),items)
 
-        loadData()
+        binding.btn.setOnClickListener { loadData() }
 
 
 

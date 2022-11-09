@@ -8,6 +8,7 @@ import java.util.*
 
 interface RetrofitService {
 
+    // 기상청
     @GET("getVilageFcst")
     fun weatherdataToString(
         @Query("serviceKey") apiKey: String,
@@ -33,6 +34,7 @@ interface RetrofitService {
 
         ) : Call<WeatherResponse>
 
+    // 병충해
     @GET("?serviceCode=SVC03&serviceType=AA001")
     fun bugDataToString(
         @Query("apiKey") apiKey: String,
@@ -40,6 +42,10 @@ interface RetrofitService {
         @Query("sickNameKor") sickNameKor: String,
 
     ) : Call<String>
+
+
+
+
 
 
 
