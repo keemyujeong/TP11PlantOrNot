@@ -52,7 +52,7 @@
                 android:fontFamily="@font/suncheon"
                 />
             <EditText
-                android:id="@+id/et_bug"
+                android:id="@+id/et_insect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"

@@ -34,14 +34,14 @@ interface RetrofitService {
 
         ) : Call<WeatherResponse>
 
-    // 병충해
-    @GET("?serviceCode=SVC03&serviceType=AA001")
-    fun bugDataToString(
+    @GET("serviceCode=SVC03&serviceType=AA001")
+    fun getInsectData(
         @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName: String,
-        @Query("sickNameKor") sickNameKor: String,
+        @Query("cropName") cropName : String,
+        @Query("sickNameKor") sickNameKor : String,
 
-    ) : Call<String>
+    ) : Call<Service>
+
 
 
 

@@ -20,7 +20,7 @@ class BugAdapter(var context : Context, var items : MutableList<BugRecyclerItem>
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.binding.tvBugName.text = items.get(position).bugName
+        holder.binding.tvBugName.text = items.get(position).InsectName
         holder.binding.tvPlantName.text = items.get(position).plantName
         Glide.with(context).load(items.get(position).bugImgUrl).error(R.color.fruit).into(holder.binding.ivBug)
     }
