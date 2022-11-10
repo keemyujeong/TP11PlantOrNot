@@ -126,7 +126,6 @@ class HomeFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                Log.i("TAG", "실패 : ${t.message}")
                 AlertDialog.Builder(requireContext()).setMessage("실패 : + ${t.message}").show()
             }
 

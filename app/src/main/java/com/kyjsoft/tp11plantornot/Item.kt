@@ -62,6 +62,17 @@ data class FarmItem(
     var cn : String
 )
 
+// 게시판 아이템
+data class BoardItem(
+    var no : Int,
+    var profileImg : String,
+    var id : String,
+    var title : String,
+    var text : String,
+    var file : String,
+    var date : String,
+)
+
 
 
 

@@ -36,7 +36,9 @@ class PickActivity : AppCompatActivity() {
     }
 
     fun loadData(cntntsNo : Int) {
+        // TODO 더미데이터
         items.add(PickRecyclerItem("제발 떠라"))
+
         val baseUrl = "http://api.nongsaro.go.kr/"
         val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"
         val retrofit : Retrofit = RetrofitHelper.getInstance(baseUrl)

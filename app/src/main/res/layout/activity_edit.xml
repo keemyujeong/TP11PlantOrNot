@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="horizontal"
-        android:layout_below="@+id/tv">
+        android:layout_below="@+id/title">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,9 +33,11 @@
             android:text="글 제목 : " />
 
         <EditText
+            android:id="@+id/et_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="13"
+            android:lines="2"
             android:inputType="text" />
     </LinearLayout>
 
@@ -55,6 +57,7 @@
             android:text="내용 : " />
 
         <EditText
+            android:id="@+id/et_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_et"
@@ -86,15 +89,19 @@
             android:layout_marginLeft="16dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/bg_et" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/iv"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/bg_et"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_baseline_image_24" />
+                android:text="사진 추가"
+                />
+
 
         </RelativeLayout>
 
