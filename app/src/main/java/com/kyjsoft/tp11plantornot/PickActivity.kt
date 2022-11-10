@@ -22,9 +22,11 @@ class PickActivity : AppCompatActivity() {
 
         binding.recyclerView.adapter = PickAdapter(this, items)
 
-        for(cntntsNo in 30595 until 30771){
-            loadData(cntntsNo)
-        }
+//        for(cntntsNo in 30595 until 30771){
+//            loadData(cntntsNo)
+//        }
+        loadData(30700)
+
 
     }
 
@@ -34,6 +36,7 @@ class PickActivity : AppCompatActivity() {
     }
 
     fun loadData(cntntsNo : Int) {
+        items.add(PickRecyclerItem("제발 떠라"))
         val baseUrl = "http://api.nongsaro.go.kr/"
         val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"
         val retrofit : Retrofit = RetrofitHelper.getInstance(baseUrl)
@@ -64,11 +67,12 @@ class PickActivity : AppCompatActivity() {
             apiKey
         ).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.i("TAG", response.body().toString())
+                Log.i("TAG-P", response.body().toString())
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.i("TAG-P", t.message.toString())
+                items.add(PickRecyclerItem("제발 떠라"))
             }
 
         })

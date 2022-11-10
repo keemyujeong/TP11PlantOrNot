@@ -19,7 +19,7 @@ interface RetrofitService {
         @Query("base_time") base_time: String,
         @Query("nx") nx: Int,
         @Query("ny") ny: Int
-    ) : Call<String>
+        ) : Call<String>
 
     @GET("getVilageFcst")
     fun getWeatherInfo(
@@ -31,7 +31,6 @@ interface RetrofitService {
         @Query("base_time") base_time: String,
         @Query("nx") nx: Int,
         @Query("ny") ny: Int
-
         ) : Call<WeatherResponse>
 
 
@@ -41,8 +40,15 @@ interface RetrofitService {
         @Query("apiKey") apiKey: String,
         @Query("cropName") cropName : String = "벼",
         @Query("sickNameKor") sickNameKor : String,
+        ) : Call<Service>
 
-    ) : Call<Service>
+    @GET("serviceCode=SVC03&serviceType=AA001")
+    fun InsectDataToString(
+        @Query("apiKey") apiKey: String,
+        @Query("cropName") cropName : String = "벼",
+        @Query("sickNameKor") sickNameKor : String,
+        ) : Call<String>
+
 
 
     // 농작업일정
@@ -50,13 +56,14 @@ interface RetrofitService {
     fun getPlantData(
         @Query("cntntsNo") cntntsNo : Int,
         @Query("apiKey") apiKey : String,
-    ) : Call<Response>
+        ) : Call<Response>
 
     @GET("service/farmWorkingPlanNew/workScheduleDt")
     fun PlantDataToString(
         @Query("cntntsNo") cntntsNo : Int,
         @Query("apiKey") apiKey : String,
-    ) : Call<String>
+        ) : Call<String>
+
 
 
 
