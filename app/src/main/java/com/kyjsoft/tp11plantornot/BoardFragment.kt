@@ -1,12 +1,20 @@
 package com.kyjsoft.tp11plantornot
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BoardFragment: Fragment() {
 
@@ -27,6 +35,11 @@ class BoardFragment: Fragment() {
 
         binding.recyclerView.adapter = BoardAdapter(requireContext(), items)
 
+        binding.swipeRefresh.setOnRefreshListener {  // swipeRefresh 새로고침
+            loadData()
+            binding.swipeRefresh.isRefreshing = false
+        }
+
         binding.fab.setOnClickListener{
             val intent : Intent = Intent(requireContext(), EditActivity::class.java)
             startActivity(intent)
@@ -35,20 +48,44 @@ class BoardFragment: Fragment() {
         loadData()
 
 
+        val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (checkSelfPermission(requireContext(), permissions[0]) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(permissions, 100) // TODO requestPermissions ..??
+        }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadData()
     }
 
     fun loadData(){
 
+        RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
+            .create(RetrofitService::class.java).loadDataFromServer()
+            .enqueue(object : Callback<MutableList<BoardItem>> {
+                override fun onResponse(
+                    call: Call<MutableList<BoardItem>>,
+                    response: Response<MutableList<BoardItem>>
+                ) {
+                    items.clear()
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
 
+                    response.body().let {
+                        it?.forEach {
+                           items.add(0, BoardRecyclerItem(it.profileImg, it.id, "관심작물", it.title, it.text, it.date ))
+                            binding.recyclerView.adapter?.notifyItemInserted(0)
 
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
-        items.add(BoardRecyclerItem("이미지", "사용자", "감자", "감자 지금 심어도 될까요?" , "새벽에는 기온이 많이 떨어져 있더군요. 밤에는 고라니가 많이 다니고.. 두더지도 많던데 두더지도 씨감자 먹나요? 좋은 씨감자를 구해서 잘 심고 싶거 든요..", "2022.11.02 17:01"))
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<MutableList<BoardItem>>, t: Throwable) {
+                    Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+                }
+
+            })
 
     }
 

@@ -42,7 +42,7 @@ class EditActivity : AppCompatActivity() {
         imgPath = getPathFromUri(it) // 이 주소를 레트로핏 사용해서 서버 DB에 올릴거임.
     }
 
-    fun getPathFromUri(uri: Uri?): String { // TODO 이거 안됨
+    fun getPathFromUri(uri: Uri?): String { // TODO 이거 안된다는데?
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(this, uri!!, proj, null, null, null)
         val cursor = loader.loadInBackground()
