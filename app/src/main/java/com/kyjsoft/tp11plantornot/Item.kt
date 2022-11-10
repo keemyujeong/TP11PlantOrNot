@@ -4,6 +4,7 @@ import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
+
 data class PlantName(
     var cntntsSj : String
 )
@@ -40,6 +41,30 @@ data class InsectItem(
     @PropertyElement(name = "cropName")
     var cropName : String
 )
+
+// 농작업 정보
+@Xml(name = "response")
+data class Response(
+    @Element(name= "body")
+    var body : FarmBody
+)
+@Xml(name = "body")
+data class FarmBody(
+    @Element(name = "item")
+    var item: FarmItem
+)
+
+@Xml(name = "item")
+data class FarmItem(
+    @PropertyElement(name = "kidofcomdtySeCodeNm")
+    var kidofcomdtySeCodeNm : String,
+    @PropertyElement(name = "cn")
+    var cn : String
+)
+
+
+
+
 
 
 

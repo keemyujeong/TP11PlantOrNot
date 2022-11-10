@@ -3,21 +3,28 @@ package com.kyjsoft.tp11plantornot
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import com.kyjsoft.tp11plantornot.databinding.ActivityPickBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class PickActivity : AppCompatActivity() {
 
+    val binding : ActivityPickBinding by lazy { ActivityPickBinding.inflate(layoutInflater) }
     var items:MutableList<PickRecyclerItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityPickBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.recyclerView.adapter = PickAdapter(this, items)
 
-        loadData()
-
+        for(cntntsNo in 30595 until 30771){
+            loadData(cntntsNo)
+        }
 
     }
 
@@ -26,54 +33,44 @@ class PickActivity : AppCompatActivity() {
         finish()
     }
 
-    fun loadData() {
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
-        items.add(PickRecyclerItem("감자"))
-        items.add(PickRecyclerItem("고구마"))
-        items.add(PickRecyclerItem("마늘"))
-        items.add(PickRecyclerItem("벼"))
-        items.add(PickRecyclerItem("옥수수"))
-        items.add(PickRecyclerItem("맛있겠다"))
-        items.add(PickRecyclerItem("밤고구마"))
-        items.add(PickRecyclerItem("먹어야지"))
+    fun loadData(cntntsNo : Int) {
+        val baseUrl = "http://api.nongsaro.go.kr/"
+        val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"
+        val retrofit : Retrofit = RetrofitHelper.getInstance(baseUrl)
+//        retrofit.create(RetrofitService::class.java).getPlantData(
+//            cntntsNo,
+//            apiKey,
+//        ).enqueue(object : Callback<Response> {
+//            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+//
+//                val result: Response? = response.body()
+//                result?.body?.item?.let {
+//                    items.add(PickRecyclerItem(it.kidofcomdtySeCodeNm))
+//                    binding.recyclerView.adapter?.notifyDataSetChanged()
+//
+//                }
+//
+//            }
+//
+//            override fun onFailure(call: Call<Response>, t: Throwable) {
+//                AlertDialog.Builder(this@PickActivity).setMessage("실패 : ${t.message}").show()
+//            }
+//
+//        })
+
+        // scalars
+        retrofit.create(RetrofitService::class.java).PlantDataToString(
+            cntntsNo,
+            apiKey
+        ).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.i("TAG", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }

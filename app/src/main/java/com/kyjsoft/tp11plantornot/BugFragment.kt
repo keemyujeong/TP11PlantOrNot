@@ -11,6 +11,7 @@ import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
 import com.kyjsoft.tp11plantornot.databinding.FragmentBugBinding
 import org.jsoup.nodes.Document
 import retrofit2.*
+import retrofit2.Response
 import kotlin.concurrent.thread
 
 class BugFragment: Fragment() {
@@ -53,12 +54,19 @@ class BugFragment: Fragment() {
                 binding.recyclerView.adapter?.notifyDataSetChanged()
 
                 var result : Service? = response.body()
+                
                 result?.list?.item?.let {
                     it.forEach {
                         items.add(BugRecyclerItem(it.cropName,it.insectKorName,it.oriImg))
+                        Toast.makeText(requireContext(), "aaa", Toast.LENGTH_SHORT).show()
+                        //TODO 여기서 부터 동작 안함 data클래스를 잘못 만들었거나 xml문서가 잘못되었거나 인데 저번에 scalars로 파싱했을 때
+                        // 전체 데이터가 안오긴 했음 일단 이거 일시정지하고 할 수 있는 것 부터 할거임
                         binding.recyclerView.adapter?.notifyDataSetChanged()
+                        Log.i("TAG", it.insectKorName + it.cropName + it.oriImg)
                     }
                 }
+
+
             }
 
             override fun onFailure(call: Call<Service>, t: Throwable) {

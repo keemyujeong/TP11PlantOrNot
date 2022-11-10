@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.kyjsoft.tp11plantornot.WeatherResponse
 import retrofit2.*
+import retrofit2.Response
 
 class HomeFragment: Fragment() {
 

@@ -34,13 +34,33 @@ interface RetrofitService {
 
         ) : Call<WeatherResponse>
 
+
+    // 병충해
     @GET("serviceCode=SVC03&serviceType=AA001")
     fun getInsectData(
         @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName : String,
+        @Query("cropName") cropName : String = "벼",
         @Query("sickNameKor") sickNameKor : String,
 
     ) : Call<Service>
+
+
+    // 농작업일정
+    @GET("service/farmWorkingPlanNew/workScheduleDt")
+    fun getPlantData(
+        @Query("cntntsNo") cntntsNo : Int,
+        @Query("apiKey") apiKey : String,
+    ) : Call<Response>
+
+    @GET("service/farmWorkingPlanNew/workScheduleDt")
+    fun PlantDataToString(
+        @Query("cntntsNo") cntntsNo : Int,
+        @Query("apiKey") apiKey : String,
+    ) : Call<String>
+
+
+
+
 
 
 
