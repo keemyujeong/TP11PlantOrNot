@@ -79,6 +79,15 @@ interface RetrofitService {
 
 
 
+    // 지도 검색
+    @GET("v2/local/search/address.json")
+    fun getKakaoAddress(
+        @Header("Authorization") key : String,
+        @Query("query") query: String
+    ) : Call<KakaoMapData>
+
+
+
 
 
 

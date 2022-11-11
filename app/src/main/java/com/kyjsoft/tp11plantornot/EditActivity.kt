@@ -50,7 +50,7 @@ class EditActivity : AppCompatActivity() {
         AlertDialog.Builder(this@EditActivity).setMessage(imgPath.toString()).show()
     }
 
-    fun getPathFromUri(uri: Uri?): String {
+    fun getPathFromUri(uri: Uri?): String { // TODO  여기 에러남
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(this, uri!!, proj, null, null, null)
         val cursor = loader.loadInBackground()

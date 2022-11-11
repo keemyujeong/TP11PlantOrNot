@@ -7,7 +7,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -50,6 +55,11 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+
+        <!--        네이티브 앱 키 발급 : 개발자 사이트에서 키 발급 받으러가   (네이티브 앱 키)    -->
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="03ae22142159c30687438546256ab699"/>
+
+
     </application>
 
 </manifest>
