@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,19 +40,9 @@ class BoardFragment: Fragment() {
             loadData()
             binding.swipeRefresh.isRefreshing = false
         }
-
-        binding.fab.setOnClickListener{
-            val intent : Intent = Intent(requireContext(), EditActivity::class.java)
-            startActivity(intent)
-        }
+        binding.fab.setOnClickListener{ startActivity(Intent(requireContext(), EditActivity::class.java)) }
 
         loadData()
-
-
-        val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-        if (checkSelfPermission(requireContext(), permissions[0]) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(permissions, 100) // TODO requestPermissions ..??
-        }
 
     }
 
@@ -64,25 +55,26 @@ class BoardFragment: Fragment() {
 
         RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
             .create(RetrofitService::class.java).loadDataFromServer()
-            .enqueue(object : Callback<MutableList<BoardItem>> {
+            .enqueue(object : Callback<MutableList<BoardDBItem>> {
                 override fun onResponse(
-                    call: Call<MutableList<BoardItem>>,
-                    response: Response<MutableList<BoardItem>>
+                    call: Call<MutableList<BoardDBItem>>,
+                    response: Response<MutableList<BoardDBItem>>
                 ) {
                     items.clear()
                     binding.recyclerView.adapter?.notifyDataSetChanged()
 
                     response.body().let {
                         it?.forEach {
-                           items.add(0, BoardRecyclerItem(it.profileImg, it.id, "관심작물", it.title, it.text, it.date ))
+                           items.add(0, BoardRecyclerItem("프로필 사진",it.id,"관심작물",it.title ,it.text,it.date))
                             binding.recyclerView.adapter?.notifyItemInserted(0)
 
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<MutableList<BoardItem>>, t: Throwable) {
+                override fun onFailure(call: Call<MutableList<BoardDBItem>>, t: Throwable) {
                     Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+                    Log.i("TAG-B", t.message.toString())
                 }
 
             })

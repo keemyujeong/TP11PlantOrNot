@@ -1,12 +1,17 @@
 package com.kyjsoft.tp11plantornot
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.ActivityEditBinding
@@ -32,6 +37,8 @@ class EditActivity : AppCompatActivity() {
         binding.iv.setOnClickListener{
             getContent.launch("image/*")
             binding.tv.visibility = View.GONE
+
+
         }
 
 
@@ -39,10 +46,11 @@ class EditActivity : AppCompatActivity() {
 
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
         Glide.with(this).load(it).error("").into(binding.iv)
-        imgPath = getPathFromUri(it) // 이 주소를 레트로핏 사용해서 서버 DB에 올릴거임.
+        imgPath = getPathFromUri(it)
+        AlertDialog.Builder(this@EditActivity).setMessage(imgPath.toString()).show()
     }
 
-    fun getPathFromUri(uri: Uri?): String { // TODO 이거 안된다는데?
+    fun getPathFromUri(uri: Uri?): String {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(this, uri!!, proj, null, null, null)
         val cursor = loader.loadInBackground()
@@ -52,6 +60,8 @@ class EditActivity : AppCompatActivity() {
         cursor.close()
         return result
     }
+
+
 
     fun clickBtn(){
         var title = binding.etTitle.toString()

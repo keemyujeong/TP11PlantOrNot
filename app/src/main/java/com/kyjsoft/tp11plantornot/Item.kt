@@ -4,11 +4,6 @@ import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
-
-data class PlantName(
-    var cntntsSj : String
-)
-
 // 기상청
 data class WeatherResponse(val response: Weather)
 data class Weather(val body: Body)
@@ -62,16 +57,29 @@ data class FarmItem(
     var cn : String
 )
 
-// 게시판 아이템
-data class BoardItem(
-    var no : Int,
-    var profileImg : String,
-    var id : String,
+
+// 정보 공유 게시판
+data class BoardRecyclerItem (
+    var imgUrl: String, // 프로필 사진
+    var name: String,
+    var selectPlant : String, // 관심작물
     var title : String,
     var text : String,
-    var file : String,
-    var date : String,
+    var date : String
 )
+
+data class BoardDBItem(
+    var no: Int,
+    var id: String,
+    var title : String,
+    var text : String,
+    var file : String, // 게시글 첨부 파일(사진)
+    var date: String
+)
+
+
+
+
 
 
 

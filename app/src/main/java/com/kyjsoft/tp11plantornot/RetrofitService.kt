@@ -74,8 +74,8 @@ interface RetrofitService {
     fun postDataToServer(@PartMap datapart : Map<String, String>,
                          @Part filepart : MultipartBody.Part) : Call<String>
 
-    @GET("TPplantOrNot/insertDB.php")
-    fun loadDataFromServer() : Call<MutableList<BoardItem>>
+    @GET("TPplantOrNot/loadDB.php")
+    fun loadDataFromServer() : Call<MutableList<BoardDBItem>>
 
 
 
