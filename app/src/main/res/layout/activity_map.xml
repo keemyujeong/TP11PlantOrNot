@@ -40,11 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_et"
                 android:fontFamily="@font/suncheon"
                 android:gravity="center"
@@ -53,19 +52,19 @@
                 android:lines="1"
                 android:maxLength="20"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:paddingTop="8dp"
+                android:paddingRight="16dp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/branch"
                 android:textSize="14sp" />
 
             <ImageView
-                android:id="@+id/tip"
+                android:id="@+id/search"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/et"
-                android:src="@drawable/ic_baseline_error_24"
+                android:src="@drawable/ic_baseline_search_24"
                 app:tint="@color/leap" />
 
         </RelativeLayout>

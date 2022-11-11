@@ -42,17 +42,10 @@ class MapActivity : AppCompatActivity() {
 
         binding.mapContainer.addView(mapView)
 
-        binding.et.setOnKeyListener { v, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-                completeInput()
-            }
-
-            true
-        }
-
+        binding.search.setOnClickListener { input() }
 
     }
-    fun completeInput(){
+    fun input(){
 
         val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
