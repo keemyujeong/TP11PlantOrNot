@@ -44,74 +44,75 @@ class MapActivity : AppCompatActivity() {
         binding.search.setOnClickListener { input() }
 
     }
-    fun input(){
-
-        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-
-        var retrofit = RetrofitHelper.getInstance("https://dapi.kakao.com/")
-        retrofit.create(RetrofitService::class.java).getKakaoAddresstoString(
-            "KakaoAK 03ae22142159c30687438546256ab699",
-            binding.et.text.toString()
-        ).enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                var result = response.body()
-                Log.i("TAG-result",response.toString())
-                Log.i("TAG-result", response.body().toString())
-
-                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Toast.makeText(this@MapActivity, "주소를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-
 //    fun input(){
 //
 //        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //
 //        var retrofit = RetrofitHelper.getInstance("https://dapi.kakao.com/")
-//        retrofit.create(RetrofitService::class.java).getKakaoAddress(
-//            "KakaoAK 03ae22142159c30687438546256ab699",
+//        retrofit.create(RetrofitService::class.java).getKakaoAddresstoString(
+//            "KakaoAK 14cec1c2faa0d112976ce952cbf71665",
 //            binding.et.text.toString()
-//        ).enqueue(object : Callback<KakaoMapData>{
-//            override fun onResponse(call: Call<KakaoMapData>, response: Response<KakaoMapData>) {
-//                var result = response.body()
-//                Log.i("TAG-result",response.toString())
-//                Log.i("TAG-result", result?.documents?.size.toString()) // TODO 이게 널값이려면 내가 주소를 잘못 입력했거나, 아이템 객체를 잘못입력했거나, 라이브러리, 퍼미션 문제없이 다 추가 했는데? 왜..?
+//        ).enqueue(object : Callback<String>{
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                Log.i("TAG-result", response.toString())
 //                Log.i("TAG-result", response.body().toString())
 //
 //                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
-//                // 중심점 변경 + 줌 레벨 변경
-//                mapView.setMapCenterPointAndZoomLevel(
-//                    MapPoint.mapPointWithGeoCoord(result?.documents?.get(0)?.address?.x!!.toDouble(), result.documents?.get(0)?.y!!.toDouble()),
-//                    5,
-//                    true
-//                )
-//
-//                // 줌 인
-//                mapView.zoomIn(true)
-//
-//                // 줌 아웃
-//                mapView.zoomOut(true)
-//
-//
 //            }
 //
-//            override fun onFailure(call: Call<KakaoMapData>, t: Throwable) {
+//            override fun onFailure(call: Call<String>, t: Throwable) {
 //                Toast.makeText(this@MapActivity, "주소를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
 //            }
 //        })
 //    }
 
+
+    fun input(){
+
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        var retrofit = RetrofitHelper.getInstance("https://dapi.kakao.com/")
+        retrofit.create(RetrofitService::class.java).getKakaoAddress(
+            "KakaoAK 14cec1c2faa0d112976ce952cbf71665",
+            binding.et.text.toString()
+        ).enqueue(object : Callback<KakaoMapData>{
+            override fun onResponse(call: Call<KakaoMapData>, response: Response<KakaoMapData>) {
+                Log.i("TAG-result",response.body()!!.documents[0].address.region_3depth_h_name)
+                Log.i("TAG-result",response.body()!!.documents[0].address.x)
+
+                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
+                if(response.body() != null){
+                    // 중심점 변경 + 줌 레벨 변경
+                    mapView.setMapCenterPointAndZoomLevel(
+                        MapPoint.mapPointWithGeoCoord(response.body()!!.documents[0].address.x.toDouble(), response.body()!!.documents[0].address.x.toDouble()),
+                        5,
+                        true
+                    )
+                    // 줌 인
+                    mapView.zoomIn(true)
+                    // 줌 아웃
+                    mapView.zoomOut(true)
+
+                } else{
+                    Toast.makeText(this@MapActivity, "주소를 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<KakaoMapData>, t: Throwable) {
+                Toast.makeText(this@MapActivity, "주소를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     fun clickBtn(){
 
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
+
+        // SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
         finish()
     }
 };

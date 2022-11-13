@@ -81,7 +81,7 @@ data class BoardDBItem(
 
 // 지도 json 데이터
 data class KakaoMapData(
-    val documents: MutableList<Document>,
+    val documents: MutableList<Document>
 )
 data class Document(
     val address: Address,

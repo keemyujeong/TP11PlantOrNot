@@ -79,7 +79,7 @@ interface RetrofitService {
 
 
 
-    // 지도 검색(TODO 실패!)
+    // 지도 검색
     @GET("v2/local/search/address.json")
     fun getKakaoAddress(
         @Header("Authorization") key: String,
