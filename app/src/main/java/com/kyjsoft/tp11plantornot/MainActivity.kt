@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_bnv_bug -> replaceFragment(BugFragment())
 
             }
-            true // 리턴 값을
+            true
         }
     }
 
