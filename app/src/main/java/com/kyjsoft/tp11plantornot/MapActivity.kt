@@ -86,7 +86,7 @@ class MapActivity : AppCompatActivity() {
                 if(response.body() != null){
                     // 중심점 변경 + 줌 레벨 변경
                     mapView.setMapCenterPointAndZoomLevel(
-                        MapPoint.mapPointWithGeoCoord(response.body()!!.documents[0].address.x.toDouble(), response.body()!!.documents[0].address.x.toDouble()),
+                        MapPoint.mapPointWithGeoCoord(response.body()!!.documents[0].address.y.toDouble(), response.body()!!.documents[0].address.x.toDouble()),
                         5,
                         true
                     )
