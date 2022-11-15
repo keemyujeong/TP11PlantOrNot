@@ -37,18 +37,18 @@ interface RetrofitService {
 
 
     // 병충해(TODO 실패!)
-    @GET("serviceCode=SVC03&serviceType=AA001")
+    @GET("service?serviceCode=SVC01&serviceType=AA001")
     fun getInsectData(
         @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName : String = "벼",
+        @Query("cropName") cropName : String = G.plant,
         @Query("sickNameKor") sickNameKor : String,
         ) : Call<Service>
 
-    @GET("serviceCode=SVC03&serviceType=AA001")
+    @GET("service?serviceCode=SVC01&serviceType=AA001")
     fun InsectDataToString(
         @Query("apiKey") apiKey: String,
         @Query("cropName") cropName : String = "벼",
-        @Query("sickNameKor") sickNameKor : String,
+        @Query("sickNameKor") sickNameKor : String
         ) : Call<String>
 
 

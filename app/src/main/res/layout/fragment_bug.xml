@@ -80,7 +80,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="작물 검색 결과 (기본 검색 결과는 관심작물 입니다.)"
+        android:text="작물 검색 결과 (작물 또는 해충명 중 한 개만 입력해도 결과 나옵니다.)"
         android:textColor="@color/branch"
         android:textSize="12sp"
         android:fontFamily="@font/suncheon"

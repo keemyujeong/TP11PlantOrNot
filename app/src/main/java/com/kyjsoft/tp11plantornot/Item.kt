@@ -29,7 +29,7 @@ data class List(
 )
 @Xml
 data class InsectItem(
-    @PropertyElement(name = "insectKorName")
+    @PropertyElement(name = "sickNameKor")
     var insectKorName : String,
     @PropertyElement(name = "oriImg")
     var oriImg : String,
