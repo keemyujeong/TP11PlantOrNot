@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +29,7 @@ import java.io.File
 class EditActivity : AppCompatActivity() {
 
     val binding : ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
-    lateinit var imgPath : String
+    lateinit var filePath : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,12 @@ class EditActivity : AppCompatActivity() {
 
         binding.btn.setOnClickListener { clickBtn() }
         binding.iv.setOnClickListener{
-            getContent.launch("image/*")
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+
             binding.tv.visibility = View.GONE
+
+            resultLauncher.launch(intent)
 
 
         }
@@ -44,13 +50,15 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
-        Glide.with(this).load(it).error("").into(binding.iv)
-        imgPath = getPathFromUri(it)
-        AlertDialog.Builder(this@EditActivity).setMessage(imgPath.toString()).show()
-    }
+    var resultLauncher : ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == RESULT_OK) {
+                Glide.with(this).load(result.data?.data).error("").into(binding.iv)
+                filePath = getPathFromUri(result.data?.data)
+            }
+        }
 
-    fun getPathFromUri(uri: Uri?): String { // TODO  여기 에러남
+    fun getPathFromUri(uri: Uri?): String {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(this, uri!!, proj, null, null, null)
         val cursor = loader.loadInBackground()
@@ -60,7 +68,6 @@ class EditActivity : AppCompatActivity() {
         cursor.close()
         return result
     }
-
 
 
     fun clickBtn(){
@@ -77,8 +84,8 @@ class EditActivity : AppCompatActivity() {
         val retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
         val retrofitService = retrofit.create(RetrofitService::class.java)
         lateinit var filepart: MultipartBody.Part // 파일 데이터 객체
-        imgPath.let {
-            val file = File(imgPath)
+        filePath.let {
+            val file = File(filePath)
             val requestBody = RequestBody.create(
                 MediaType.parse("image/*"),
                 file

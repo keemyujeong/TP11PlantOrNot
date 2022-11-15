@@ -3,16 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kyjsoft.tp11plantornot">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -20,28 +16,27 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TP11PlantOrNot"
-        tools:targetApi="31"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
-
+        tools:targetApi="31">
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".EditActivity"
             android:exported="false" />
         <activity
             android:name=".MyPostActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".PickActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MapActivity"
             android:exported="true">
@@ -53,13 +48,10 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
-
-        <!--        네이티브 앱 키 발급 : 개발자 사이트에서 키 발급 받으러가   (네이티브 앱 키)    -->
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="03ae22142159c30687438546256ab699"/>
-
-
+            android:exported="false"></activity> <!-- 네이티브 앱 키 발급 : 개발자 사이트에서 키 발급 받으러가   (네이티브 앱 키) -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="03ae22142159c30687438546256ab699" />
     </application>
 
 </manifest>

@@ -115,7 +115,7 @@ class MapActivity : AppCompatActivity() {
         startActivity(intent)
 
         // TODO SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
-        location = G.location
+        G.location = location
 
         finish()
     }

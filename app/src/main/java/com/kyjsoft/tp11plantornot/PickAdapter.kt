@@ -19,7 +19,7 @@ class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>
         init {
             itemView.setOnClickListener {
                 G.plant = binding.tv.text.toString()
-                val intent: Intent = Intent(context, ProfileActivity::class.java)
+                val intent: Intent = Intent(context, LoginActivity::class.java)
                 context.startActivity(intent)
 
 
