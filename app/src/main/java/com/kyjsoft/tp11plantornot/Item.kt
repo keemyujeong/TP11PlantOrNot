@@ -41,12 +41,12 @@ data class InsectItem(
 @Xml(name = "response")
 data class Response(
     @Element(name= "body")
-    var body : FarmBody
+    val body : FarmBody
 )
 @Xml(name = "body")
 data class FarmBody(
     @Element(name = "item")
-    var item: FarmItem
+    val item: FarmItem
 )
 
 @Xml(name = "item")

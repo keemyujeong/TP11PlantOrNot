@@ -44,6 +44,7 @@ class BugFragment: Fragment() {
 
         val insectApiKey = "2022d5474582821a4f984e2b8988fecca95c"
         var retrofit : Retrofit = RetrofitHelper.getInstance("http://ncpms.rda.go.kr/npmsAPI/")
+        // TODO 얘는 retrofit 객체를 따로 만들어야할 듯
 //        retrofit.create(RetrofitService::class.java).getInsectData(
 //            insectApiKey,
 //            binding.etPlant.toString(),
@@ -61,7 +62,7 @@ class BugFragment: Fragment() {
 //                        items.add(BugRecyclerItem(it.cropName,it.insectKorName,it.oriImg))
 //                        Toast.makeText(requireContext(), "aaa", Toast.LENGTH_SHORT).show()
 //                        binding.recyclerView.adapter?.notifyDataSetChanged()
-//                        Log.i("TAG", it.insectKorName + it.cropName + it.oriImg)
+//                        Log.i("TAG-I", it.insectKorName + it.cropName + it.oriImg)
 //                    }
 //                }
 //
@@ -70,11 +71,12 @@ class BugFragment: Fragment() {
 //
 //            override fun onFailure(call: Call<Service>, t: Throwable) {
 //                Toast.makeText(requireContext(), "실패 : ${t.message}", Toast.LENGTH_SHORT).show()
+//                Log.i("TAG-I", t.message.toString())
 //            }
 //        })
 
         // scalars
-        retrofit.create(RetrofitService::class.java).InsectDataToString(
+        retrofit.create(RetrofitService::class.java).insectDataToString(
             insectApiKey,
             binding.etPlant.text.toString(),
             binding.etInsect.text.toString()

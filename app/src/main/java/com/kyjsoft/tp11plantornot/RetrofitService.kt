@@ -45,9 +45,9 @@ interface RetrofitService {
         ) : Call<Service>
 
     @GET("service?serviceCode=SVC01&serviceType=AA001")
-    fun InsectDataToString(
+    fun insectDataToString(
         @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName : String = "벼",
+        @Query("cropName") cropName : String = G.plant,
         @Query("sickNameKor") sickNameKor : String
         ) : Call<String>
 

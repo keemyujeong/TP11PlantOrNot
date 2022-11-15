@@ -1,5 +1,6 @@
 package com.kyjsoft.tp11plantornot
 
+import com.google.gson.GsonBuilder
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import retrofit2.Retrofit
