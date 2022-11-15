@@ -24,6 +24,7 @@ class MapActivity : AppCompatActivity() {
 
     val binding : ActivityMapBinding by lazy { ActivityMapBinding.inflate(layoutInflater) }
     val mapView by lazy { MapView(this) }
+    lateinit var location: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +81,10 @@ class MapActivity : AppCompatActivity() {
         ).enqueue(object : Callback<KakaoMapData>{
             override fun onResponse(call: Call<KakaoMapData>, response: Response<KakaoMapData>) {
                 Log.i("TAG-result",response.body()!!.documents[0].address.region_3depth_h_name)
-                Log.i("TAG-result",response.body()!!.documents[0].address.x)
+//                Log.i("TAG-result",response.body()!!.documents[0].address.x)
+//                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
+                location = response.body()!!.documents[0].address.region_3depth_h_name
 
-                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
                 if(response.body() != null){
                     // 중심점 변경 + 줌 레벨 변경
                     mapView.setMapCenterPointAndZoomLevel(
@@ -112,7 +114,9 @@ class MapActivity : AppCompatActivity() {
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
 
-        // SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
+        // TODO SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
+        location = G.location
+
         finish()
     }
 };

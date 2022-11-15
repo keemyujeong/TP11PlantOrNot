@@ -126,7 +126,7 @@ class HomeFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                AlertDialog.Builder(requireContext()).setMessage("실패 : + ${t.message}").show()
+                AlertDialog.Builder(requireContext()).setMessage("날씨 정보를 불러오지 못했습니다.").show()
             }
 
 

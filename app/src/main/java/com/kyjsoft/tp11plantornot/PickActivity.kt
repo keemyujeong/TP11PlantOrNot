@@ -15,6 +15,7 @@ class PickActivity : AppCompatActivity() {
 
     val binding : ActivityPickBinding by lazy { ActivityPickBinding.inflate(layoutInflater) }
     var items:MutableList<PickRecyclerItem> = mutableListOf()
+    lateinit var plant :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class PickActivity : AppCompatActivity() {
 
     fun loadData(cntntsNo : Int) {
         // TODO 더미데이터
-        items.add(PickRecyclerItem("제발 떠라"))
+        items.add(0,PickRecyclerItem("제발 떠라"))
 
         val baseUrl = "http://api.nongsaro.go.kr/"
         val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"
