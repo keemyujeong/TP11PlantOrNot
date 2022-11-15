@@ -43,7 +43,7 @@ class ProfileActivity : AppCompatActivity() {
             if(result.resultCode == RESULT_OK) {
                 Glide.with(this).load(result.data?.data).error("").into(binding.civ)
                 imgUrl = getPathFromUri(result.data?.data)
-                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
 
             }
         }

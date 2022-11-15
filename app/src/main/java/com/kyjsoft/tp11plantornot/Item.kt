@@ -65,6 +65,7 @@ data class BoardRecyclerItem (
     var selectPlant : String, // 관심작물
     var title : String,
     var text : String,
+    var file : String, // 게시글 첨부 파일(사진)
     var date : String
 )
 

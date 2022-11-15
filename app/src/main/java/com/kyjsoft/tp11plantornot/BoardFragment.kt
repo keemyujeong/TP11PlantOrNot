@@ -53,6 +53,9 @@ class BoardFragment: Fragment() {
 
     fun loadData(){
 
+        items.clear()
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+
         RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
             .create(RetrofitService::class.java).loadDataFromServer()
             .enqueue(object : Callback<MutableList<BoardDBItem>> {
@@ -65,7 +68,7 @@ class BoardFragment: Fragment() {
 
                     response.body().let {
                         it?.forEach {
-                           items.add(0, BoardRecyclerItem("프로필 사진",it.id,"관심작물",it.title ,it.text,it.date))
+                           items.add(0, BoardRecyclerItem(G.pic,it.id,G.plant,it.title ,it.text,it.file,it.date))
                             binding.recyclerView.adapter?.notifyItemInserted(0)
 
                         }

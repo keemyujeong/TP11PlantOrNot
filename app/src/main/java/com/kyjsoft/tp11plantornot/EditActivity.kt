@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -35,7 +36,6 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener { clickBtn() }
         binding.iv.setOnClickListener{
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -43,10 +43,8 @@ class EditActivity : AppCompatActivity() {
             binding.tv.visibility = View.GONE
 
             resultLauncher.launch(intent)
-
-
         }
-
+        binding.btn.setOnClickListener { clickBtn() }
 
     }
 
@@ -66,24 +64,19 @@ class EditActivity : AppCompatActivity() {
         cursor.moveToFirst()
         val result = cursor.getString(column_index)
         cursor.close()
+//        Log.i("TAG-result", result)
         return result
     }
 
 
     fun clickBtn(){
-        var title = binding.etTitle.toString()
-        var text = binding.etContent.toString()
 
-
-        // retrofit으로 웹서버에 올리기
-        var dataPart : MutableMap<String, String> = HashMap()
-        dataPart["id"] = "로그인 아이디"
-        dataPart["title"] = title
-        dataPart["text"] = text
+        val title = binding.etTitle.text.toString()
+        val text = binding.etContent.text.toString()
 
         val retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
         val retrofitService = retrofit.create(RetrofitService::class.java)
-        lateinit var filepart: MultipartBody.Part // 파일 데이터 객체
+        lateinit var filepart: MultipartBody.Part // 파일 데이터 객체를 포장해서 레트로핏으로 내 호스팅 서버에 보내기
         filePath.let {
             val file = File(filePath)
             val requestBody = RequestBody.create(
@@ -91,13 +84,22 @@ class EditActivity : AppCompatActivity() {
                 file
             )
             filepart = MultipartBody.Part.createFormData(
-                "img", file.name, requestBody
+                "file", file.name, requestBody
             )
+//            Log.i("TAG-result", file.name)
+
         }
+
+        // retrofit으로 웹서버에 올리기
+        var dataPart : MutableMap<String, String> = HashMap() // String을 hashMap()으로 묶어서 레트로핏으로 내 호스팅 서버에 보내기
+        dataPart["id"] = "로그인 아이디"
+        dataPart["title"] = title
+        dataPart["text"] = text
 
         retrofitService.postDataToServer(dataPart, filepart).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Toast.makeText(this@EditActivity, "성공~", Toast.LENGTH_SHORT).show()
+                Log.i("TAG-result", response.body().toString())
                 finish()
             }
 

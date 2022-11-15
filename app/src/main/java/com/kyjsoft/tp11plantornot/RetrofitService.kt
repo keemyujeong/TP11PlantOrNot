@@ -68,11 +68,11 @@ interface RetrofitService {
 
 
 
-    // Dothome서버에 작성글 게시판 (TODO insert는 됨.)
+    // Dothome서버에 작성글 게시판 (TODO 사진만 안됨.)
     @Multipart
     @POST("TPplantOrNot/insertDB.php")
-    fun postDataToServer(@PartMap datapart : Map<String, String>,
-                         @Part filepart : MultipartBody.Part) : Call<String>
+    fun postDataToServer(@PartMap dataPart : Map<String, String>,
+                         @Part filePart : MultipartBody.Part) : Call<String>
 
     @GET("TPplantOrNot/loadDB.php")
     fun loadDataFromServer() : Call<MutableList<BoardDBItem>>
