@@ -16,7 +16,7 @@ data class Item(
 )
 
 
-// 병충해
+// 병충해(TODO 일단 스탑)
 @Xml(name = "service")
 data class Service(
     @Element(name = "list")
@@ -37,7 +37,7 @@ data class InsectItem(
     var cropName : String
 )
 
-// 농작업 정보
+// 농작업 정보(TODO 일단 스탑)
 @Xml(name = "response")
 data class Response(
     @Element(name= "body")
