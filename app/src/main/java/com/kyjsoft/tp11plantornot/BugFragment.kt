@@ -1,10 +1,12 @@
 package com.kyjsoft.tp11plantornot
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kyjsoft.tp11plantornot.databinding.FragmentBugBinding
@@ -34,7 +36,12 @@ class BugFragment: Fragment() {
         items.clear()
         binding.recyclerView.adapter?.notifyDataSetChanged()
 
-        binding.btn.setOnClickListener { loadData() }
+        binding.btn.setOnClickListener {
+            val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+
+            loadData()
+        }
 
 
 

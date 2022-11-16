@@ -15,6 +15,15 @@ data class Item(
     var fcstValue : String
 )
 
+// weatherXY.json Item 객체
+data class WeatherItem (
+    var region1 : String,
+    var region2 : String,
+    var region3 : String,
+    var nx : String,
+    var ny : String
+)
+
 
 // 병충해(TODO 일단 스탑)
 @Xml(name = "service")

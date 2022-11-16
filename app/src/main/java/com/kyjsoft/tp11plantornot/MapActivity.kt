@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.kakao.util.maps.helper.Utility
 import com.kyjsoft.tp11plantornot.databinding.ActivityMapBinding
 import net.daum.mf.map.api.MapPoint
@@ -19,6 +20,7 @@ import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.InputStream
 
 class MapActivity : AppCompatActivity() {
 
@@ -80,10 +82,11 @@ class MapActivity : AppCompatActivity() {
             binding.et.text.toString()
         ).enqueue(object : Callback<KakaoMapData>{
             override fun onResponse(call: Call<KakaoMapData>, response: Response<KakaoMapData>) {
-                Log.i("TAG-result",response.body()!!.documents[0].address.region_3depth_h_name)
-//                Log.i("TAG-result",response.body()!!.documents[0].address.x)
+                Log.i("TAG-result",response.body()!!.documents[0].address.region_2depth_name)
+                Log.i("TAG-result",response.body()!!.documents[0].address.x)
 //                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
                 location = response.body()!!.documents[0].address.region_3depth_h_name
+                region2 = response.body()!!.documents[0].address.region_2depth_name
 
                 if(response.body() != null){
                     // 중심점 변경 + 줌 레벨 변경
@@ -109,13 +112,49 @@ class MapActivity : AppCompatActivity() {
         })
     }
 
-    fun clickBtn(){
+    lateinit var region2 : String // 카카오 로컬 API 지역 이름 변수
 
+    fun clickBtn(){
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
 
         // TODO SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
         G.location = location
+
+        // 기상청 json 파싱
+        val weatherJsonStr : String = assets.open("jsons/weatherXY.json").bufferedReader().use { it.readText() }
+//        Log.i("TAG", weatherJsonStr)
+        val gson = Gson()
+        var weatherItem = gson.fromJson(weatherJsonStr, Array<WeatherItem>::class.java)
+        weatherItem.let {
+            it.forEach {
+                when(it.region3){
+                    G.location -> {
+                        if(it.region2 == region2){
+                            G.locationX = it.nx
+                            G.locationY = it.ny
+//                            Log.i("TAG", G.locationX + G.locationY)
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         finish()
     }

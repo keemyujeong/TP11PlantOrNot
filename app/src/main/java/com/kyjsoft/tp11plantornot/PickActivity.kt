@@ -15,7 +15,7 @@ class PickActivity : AppCompatActivity() {
 
     val binding : ActivityPickBinding by lazy { ActivityPickBinding.inflate(layoutInflater) }
     var items:MutableList<PickRecyclerItem> = mutableListOf()
-    lateinit var plant :String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +23,15 @@ class PickActivity : AppCompatActivity() {
 
         binding.recyclerView.adapter = PickAdapter(this, items)
 
+
+
 //        for(cntntsNo in 30595 until 30771){
 //            loadData(cntntsNo)
 //        }
         loadData(30700)
+
+        //
+
 
 
     }

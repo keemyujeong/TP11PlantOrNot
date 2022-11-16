@@ -42,6 +42,9 @@ class HomeFragment: Fragment() {
         drawerToggle = ActionBarDrawerToggle(requireActivity(), binding.drawerId, binding.toolbar, R.string.drawer_open, R.string.drawer_close)
         drawerToggle.syncState()
         binding.drawerId.addDrawerListener(drawerToggle)
+        binding.tvLocation.text = G.location
+        binding.myPlant.text = G.plant
+        binding.myPlant2.text = G.plant
 
         binding.nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId){
@@ -98,8 +101,8 @@ class HomeFragment: Fragment() {
             "JSON",
             SimpleDateFormat("yyyyMMdd").format(Date()),
             "0200",
-            56,
-            106
+            G.locationX.toInt(),
+            G.locationY.toInt()
         ).enqueue( object : Callback<WeatherResponse>{
 
             override fun onResponse(
