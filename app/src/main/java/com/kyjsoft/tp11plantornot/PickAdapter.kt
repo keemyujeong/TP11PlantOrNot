@@ -1,5 +1,6 @@
 package com.kyjsoft.tp11plantornot
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -17,12 +18,10 @@ class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>
         val binding : PickRecyclerItemBinding = PickRecyclerItemBinding.bind(itemView)
 
         init {
-            itemView.setOnClickListener {
+            itemView.setOnClickListener{
                 G.plant = binding.tv.text.toString()
                 val intent: Intent = Intent(context, LoginActivity::class.java)
                 context.startActivity(intent)
-
-
             }
         }
     }

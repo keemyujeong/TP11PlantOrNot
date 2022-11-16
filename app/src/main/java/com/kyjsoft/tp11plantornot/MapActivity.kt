@@ -115,6 +115,9 @@ class MapActivity : AppCompatActivity() {
     lateinit var region_2depth_name : String // 카카오 로컬 API 지역 이름 변수
 
     fun clickBtn(){
+
+        // 입력안하고 넘어가면 에러나기 때문에 그거 처리해야함.
+
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
 
