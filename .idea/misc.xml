@@ -9,6 +9,9 @@
         <entry key="app/src/main/res/drawable/bg_et.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/bg_pick_item.xml" value="0.1575" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1575" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.171" />
         <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.142" />
         <entry key="app/src/main/res/drawable/icon_background.xml" value="0.1195" />
         <entry key="app/src/main/res/drawable/like.xml" value="0.1575" />

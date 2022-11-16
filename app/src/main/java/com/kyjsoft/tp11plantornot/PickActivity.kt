@@ -1,9 +1,11 @@
 package com.kyjsoft.tp11plantornot
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import com.kyjsoft.tp11plantornot.databinding.ActivityPickBinding
 import retrofit2.Call
@@ -22,6 +24,12 @@ class PickActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerView.adapter = PickAdapter(this, items)
+
+        binding.search.setOnClickListener {
+            // TODO 검색 필터 기능 쓸거야?
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
 
 
 

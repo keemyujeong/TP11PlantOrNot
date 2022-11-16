@@ -86,13 +86,13 @@ class MapActivity : AppCompatActivity() {
                 Log.i("TAG-result",response.body()!!.documents[0].address.x)
 //                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
                 location = response.body()!!.documents[0].address.region_3depth_h_name
-                region2 = response.body()!!.documents[0].address.region_2depth_name
+                region_2depth_name = response.body()!!.documents[0].address.region_2depth_name
 
                 if(response.body() != null){
                     // 중심점 변경 + 줌 레벨 변경
                     mapView.setMapCenterPointAndZoomLevel(
                         MapPoint.mapPointWithGeoCoord(response.body()!!.documents[0].address.y.toDouble(), response.body()!!.documents[0].address.x.toDouble()),
-                        5,
+                        3,
                         true
                     )
                     // 줌 인
@@ -112,7 +112,7 @@ class MapActivity : AppCompatActivity() {
         })
     }
 
-    lateinit var region2 : String // 카카오 로컬 API 지역 이름 변수
+    lateinit var region_2depth_name : String // 카카오 로컬 API 지역 이름 변수
 
     fun clickBtn(){
         val intent : Intent = Intent(this, PickActivity::class.java)
@@ -130,10 +130,10 @@ class MapActivity : AppCompatActivity() {
             it.forEach {
                 when(it.region3){
                     G.location -> {
-                        if(it.region2 == region2){
+                        if(it.region2 == region_2depth_name){
                             G.locationX = it.nx
                             G.locationY = it.ny
-//                            Log.i("TAG", G.locationX + G.locationY)
+                            Log.i("TAG", G.locationX + G.locationY)
                         }
 
                     }

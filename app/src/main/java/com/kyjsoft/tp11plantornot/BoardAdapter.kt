@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.BoardRecyclerItemBinding
@@ -32,7 +33,17 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
         val binding : BoardRecyclerItemBinding = BoardRecyclerItemBinding.bind(itemView)
 
         init { // class 영역에서 함수 말고 실행문을 쓸 때 초기화 블럭 안에 써라.
-            binding.like.setOnClickListener {  }
+            binding.like.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+                override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+                    if(p1){
+                        // 토글 true값일 때 처리 -> 레트로핏코드 쓰기. php코드도 필요함 TODO DB에 like 1 추가
+
+                    }else{
+                        // 토글 false값 일때 처리
+
+                    }
+                }
+            })
         }
 
     }

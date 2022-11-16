@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,16 @@ class MyPostAdapter(val context: Context, var items : MutableList<MyPostRecycler
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding : MyPostRecyclerItemBinding = MyPostRecyclerItemBinding.bind(itemView)
+
+        init {
+            binding.btnDelete.setOnClickListener {
+                // MY DBSQL에서 해당 게시글 delete
+            }
+            binding.btnUpdate.setOnClickListener { context.startActivity(Intent(context, EditActivity::class.java)) }
+        }
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {

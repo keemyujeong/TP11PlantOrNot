@@ -25,6 +25,8 @@ data class WeatherItem (
 )
 
 
+
+
 // 병충해(TODO 일단 스탑)
 @Xml(name = "service")
 data class Service(
@@ -46,6 +48,12 @@ data class InsectItem(
     var cropName : String
 )
 
+// 병충해 파싱 정보
+data class BugRecyclerItem(var plantName : String, var InsectName : String, var bugImgUrl : String)
+
+
+
+
 // 농작업 정보(TODO 일단 스탑)
 @Xml(name = "response")
 data class Response(
@@ -66,6 +74,13 @@ data class FarmItem(
     var cn : String
 )
 
+// 관심작물 선택
+data class PickRecyclerItem (var plant:String)
+
+// 관심 작물 농작업 일정
+data class HomeRecyclerItem(var title: String, var text: String)
+
+
 
 // 정보 공유 게시판
 data class BoardRecyclerItem (
@@ -79,13 +94,16 @@ data class BoardRecyclerItem (
 )
 
 data class BoardDBItem(
-    var no: Int,
+    var boardno: Int,
     var id: String,
     var title : String,
     var text : String,
     var file : String, // 게시글 첨부 파일(사진)
     var date: String
 )
+
+// 내가 쓴 글 관리
+data class MyPostRecyclerItem (var title : String, var text : String, var howManyLike : Int)
 
 
 
