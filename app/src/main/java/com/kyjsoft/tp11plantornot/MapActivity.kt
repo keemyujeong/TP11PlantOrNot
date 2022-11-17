@@ -1,9 +1,13 @@
 package com.kyjsoft.tp11plantornot
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.database.DatabaseUtils
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -32,8 +36,6 @@ class MapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener { clickBtn() }
-
         val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
             requestPermissions(permissions, 100)
@@ -45,6 +47,8 @@ class MapActivity : AppCompatActivity() {
         binding.mapContainer.addView(mapView)
 
         binding.search.setOnClickListener { input() }
+        binding.btn.setOnClickListener { clickBtn() }
+
 
     }
 //    fun input(){
@@ -86,7 +90,10 @@ class MapActivity : AppCompatActivity() {
                 Log.i("TAG-result",response.body()!!.documents[0].address.x)
 //                Toast.makeText(this@MapActivity, "aaa", Toast.LENGTH_SHORT).show()
                 location = response.body()!!.documents[0].address.region_3depth_h_name
+                Log.i("TAG-result",location)
+
                 region_2depth_name = response.body()!!.documents[0].address.region_2depth_name
+                G.location = location
 
                 if(response.body() != null){
                     // 중심점 변경 + 줌 레벨 변경
@@ -121,10 +128,9 @@ class MapActivity : AppCompatActivity() {
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
 
-        // TODO SQLite에 location 저장 -> 파싱한 "region_3depth_name" 이거만 저장
-        G.location = location
+        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
 
-        // 기상청 json 파싱
+        // 기상청 nx,ny json 파싱
         val weatherJsonStr : String = assets.open("jsons/weatherXY.json").bufferedReader().use { it.readText() }
 //        Log.i("TAG", weatherJsonStr)
         val gson = Gson()
@@ -132,33 +138,24 @@ class MapActivity : AppCompatActivity() {
         weatherItem.let {
             it.forEach {
                 when(it.region3){
-                    G.location -> {
-                        if(it.region2 == region_2depth_name){
+                    location -> {
+                        if(it.region2 == region_2depth_name){ // 기상청 주소지랑 카카오 로컬이랑 맞는지
                             G.locationX = it.nx
                             G.locationY = it.ny
-                            Log.i("TAG", G.locationX + G.locationY)
-                        }
+                            Log.i("TAG-location", G.locationX + G.locationY)
+                            Log.i("TAG-location", location)
+                            Log.i("TAG-location", G.location)
 
+//                            Log.i("TAG", it.region2 + region_2depth_name)
+
+                            // SQLite에 정보 저장
+                            db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, location TEXT, nx TEXT, ny TEXT )")
+                            db.execSQL("INSERT INTO map(location, nx, ny) VALUES(?,?,?)", arrayOf(G.location, G.locationX, G.locationY))
+                        }
                     }
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         finish()
     }
 };

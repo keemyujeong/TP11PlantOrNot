@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
@@ -91,9 +93,18 @@ class HomeFragment: Fragment() {
 //            }
 //        })
 
+        //SQLite에서 의 위치 값, nx, ny값
+        val db : SQLiteDatabase = requireContext().openOrCreateDatabase("map", AppCompatActivity.MODE_PRIVATE, null)
 
+        val cursor = db.rawQuery("SELECT location,nx,ny FROM map WHERE num=?", arrayOf("0")) ?: return
 
+        while(cursor.moveToNext()){
+            G.locationX = cursor.getString(1)
+            G.locationY = cursor.getString(2)
+        }
+        Log.i("TAG-location", G.location)
 
+        // 기상청 최저기온, 최고 기온 파싱
         retrofit.create(RetrofitService::class.java).getWeatherInfo(
             weatherApiKey,
             300, // 값이 500개는 되어야 최저 기온이랑, 최고 기온 받을 수 있다고 함.

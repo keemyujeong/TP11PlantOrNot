@@ -7,8 +7,10 @@ class G {
         lateinit var locationY : String
 
         lateinit var plant : String
+
         lateinit var pic : String
         lateinit var name : String
+
         lateinit var id : String
     }
 }

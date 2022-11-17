@@ -38,7 +38,6 @@ class PickActivity : AppCompatActivity() {
 //        }
         loadData(30700)
 
-        //
 
 
 
