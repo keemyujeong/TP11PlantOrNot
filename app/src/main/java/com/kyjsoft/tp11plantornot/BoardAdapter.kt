@@ -1,14 +1,20 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.BoardRecyclerItemBinding
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerItem>) : RecyclerView.Adapter<BoardAdapter.VH>() {
 
@@ -18,7 +24,7 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        Glide.with(context).load("http://kyjsoft.dothome.co.kr/TPplantOrNot/"+items.get(position).imgUrl).error(R.drawable.profle).into(holder.binding.civ)
+        Glide.with(context).load("http://kyjsoft.dothome.co.kr/TPplantOrNot/"+items[position].imgUrl).error(R.drawable.profle).into(holder.binding.civ)
         holder.binding.tvName.text = items[position].name
         holder.binding.tvSelectplant.text = items[position].selectPlant
         holder.binding.tvTitle.text = items[position].title
@@ -33,13 +39,31 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
         val binding : BoardRecyclerItemBinding = BoardRecyclerItemBinding.bind(itemView)
 
         init { // class 영역에서 함수 말고 실행문을 쓸 때 초기화 블럭 안에 써라.
+            var datapart : MutableMap<String, String> = HashMap()
+            datapart["id"] = "로그인 아이디"
+            datapart["boardNo"] = "?" // 좋아요 누른 게시판dothomeDB에서 가져온 no 값으로.
+
             binding.like.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
                 override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
                     if(p1){
-                        // 토글 true값일 때 처리 -> 레트로핏코드 쓰기. php코드도 필요함 TODO DB에 like 1 추가
+                        // 토글 true값일 때 처리
+                        // dothomeLikeDB에서 줄 삭제
+                        val retrofit = RetrofitHelper.getInstance("http://kyjsoft.dothome.co.kr/")
+                        val retrofitService = retrofit.create(RetrofitService::class.java)
+                        retrofitService.postLikeDataFromServer(datapart).enqueue(object : Callback<String> {
+
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                Log.i("TAG-result", response.body().toString())
+                            }
+                            override fun onFailure(call: Call<String>, t: Throwable) {
+                                AlertDialog.Builder(context).setMessage(t.message).show()
+                            }
+
+                        })
 
                     }else{
                         // 토글 false값 일때 처리
+                        // dothomeLikeDB에서 줄 삭제
 
                     }
                 }

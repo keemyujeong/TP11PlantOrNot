@@ -95,12 +95,18 @@ data class BoardRecyclerItem (
 
 data class BoardDBItem(
     var boardno: Int,
-    var id: String,
+    var name: String,
     var title : String,
     var text : String,
     var file : String, // 게시글 첨부 파일(사진)
     var date: String
 )
+
+data class ProfileDBItem(
+    var imgUrl : String
+)
+
+
 
 // 내가 쓴 글 관리
 data class MyPostRecyclerItem (var title : String, var text : String, var howManyLike : Int)

@@ -29,6 +29,7 @@ class PickActivity : AppCompatActivity() {
             // TODO 검색 필터 기능 쓸거야? -> searchview라는 게 있던데
             val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
         }
 
 
@@ -37,10 +38,6 @@ class PickActivity : AppCompatActivity() {
 //            loadData(cntntsNo)
 //        }
         loadData(30700)
-
-
-
-
     }
 
     override fun onPause() {

@@ -93,10 +93,11 @@ class EditActivity : AppCompatActivity() {
         // retrofit으로 웹서버에 올리기
         var dataPart : MutableMap<String, String> = HashMap() // String을 hashMap()으로 묶어서 레트로핏으로 내 호스팅 서버에 보내기
         dataPart["id"] = "로그인 아이디"
+        dataPart["name"] = G.name
         dataPart["title"] = title
         dataPart["text"] = text
 
-        retrofitService.postDataToServer(dataPart, filepart).enqueue(object : Callback<String> {
+        retrofitService.postBoardDataToServer(dataPart, filepart).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Toast.makeText(this@EditActivity, "성공~", Toast.LENGTH_SHORT).show()
                 Log.i("TAG-result", response.body().toString())

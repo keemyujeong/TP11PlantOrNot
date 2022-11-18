@@ -14,14 +14,24 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.ActivityProfileBinding
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.create
+import java.io.File
 
 class ProfileActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityProfileBinding
-    var imgUrl : String? =null
+    var imgUrl : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,15 +60,43 @@ class ProfileActivity : AppCompatActivity() {
 
 
     fun clickBtn(){
-
         G.name = binding.et.text.toString()
-        G.pic = imgUrl.toString()
-
-        val intent : Intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
 
         // TODO 한꺼번에 dothome서버에 저장 ( location 빼고 나머지 저장 )
+        var datapart : MutableMap<String, String> = HashMap()
+        datapart["id"] = "로그인 아이디"
+        datapart["name"] = G.name
+        datapart["plant"] = G.plant
+
+        val retrofit : Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
+        val retrofitService = retrofit.create(RetrofitService::class.java)
+        lateinit var filePart : MultipartBody.Part
+        imgUrl!!.let {
+            val file = File(imgUrl)
+            val requestBody = RequestBody.create(
+                MediaType.parse("image/*"),
+                file
+            )
+            filePart = MultipartBody.Part.createFormData(
+                "file", file.name, requestBody
+            )
+        }
+
+        retrofitService.postProfileDataToServer(datapart, filePart).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.i("TAG-profile", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                AlertDialog.Builder(this@ProfileActivity).setMessage(t.message).show()
+            }
+        })
+
+        //TODO G.pic 전역 변수에 retrofit으로 profileDB로드한 이미지 값 가져오기
+
+
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
 
 
     }

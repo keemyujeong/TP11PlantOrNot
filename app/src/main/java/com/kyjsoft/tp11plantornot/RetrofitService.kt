@@ -33,10 +33,23 @@ interface RetrofitService {
         @Query("ny") ny: Int
         ) : Call<String>
 
+    // 지도 검색
+    @GET("v2/local/search/address.json")
+    fun getKakaoAddress(
+        @Header("Authorization") key: String,
+        @Query("query") query: String
+    ) : Call<KakaoMapData>
+
+    @GET("v2/local/search/address.json")
+    fun getKakaoAddresstoString(
+        @Header("Authorization") key: String,
+        @Query("query") query: String
+    ) : Call<String>
 
 
 
-    // 병충해(TODO 실패!)
+
+    // 병충해(TODO 실패! -> scalars로는 날아옴)
     @GET("service?serviceCode=SVC01&serviceType=AA001")
     fun getInsectData(
         @Query("apiKey") apiKey: String,
@@ -70,27 +83,39 @@ interface RetrofitService {
 
     // Dothome서버에 작성글 게시판
     @Multipart
-    @POST("TPplantOrNot/insertDB.php")
-    fun postDataToServer(@PartMap dataPart : Map<String, String>,
-                         @Part filePart : MultipartBody.Part) : Call<String>
+    @POST("TPplantOrNot/insertBoardDB.php")
+    fun postBoardDataToServer(@PartMap dataPart : Map<String, String>,
+                              @Part filePart : MultipartBody.Part) : Call<String>
 
-    @GET("TPplantOrNot/loadDB.php")
-    fun loadDataFromServer() : Call<MutableList<BoardDBItem>>
+    @GET("TPplantOrNot/loadBoardDB.php")
+    fun loadBoardDataFromServer() : Call<MutableList<BoardDBItem>>
+
+
+    // Dothome서버에 프로필 게시판
+    @Multipart
+    @POST("TPplantOrNot/insertProfileDB.php")
+    fun postProfileDataToServer(@PartMap dataPart : Map<String, String>,
+                              @Part filePart : MultipartBody.Part) : Call<String>
+
+    @Multipart
+    @POST("TPplantOrNot/loadProfileDB.php")
+    fun loadProfileDataFromServer(@PartMap dataPart : Map<String, String>) : Call<ProfileDBItem>
+
+
+    // Dothome서버에 좋아요 DB
+    @Multipart
+    @POST("TPplantOrNot/loadLikeDB.php")
+    fun postLikeDataFromServer(@PartMap dataPart : Map<String, String>) : Call<String>
 
 
 
-    // 지도 검색
-    @GET("v2/local/search/address.json")
-    fun getKakaoAddress(
-        @Header("Authorization") key: String,
-        @Query("query") query: String
-    ) : Call<KakaoMapData>
 
-    @GET("v2/local/search/address.json")
-    fun getKakaoAddresstoString(
-        @Header("Authorization") key: String,
-        @Query("query") query: String
-    ) : Call<String>
+
+
+
+
+
+
 
 
 

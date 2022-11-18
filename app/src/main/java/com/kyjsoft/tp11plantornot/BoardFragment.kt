@@ -52,12 +52,31 @@ class BoardFragment: Fragment() {
     }
 
     fun loadData(){
-
+        
         items.clear()
         binding.recyclerView.adapter?.notifyDataSetChanged()
 
+        var datapart : MutableMap<String, String> = HashMap()
+        datapart["id"] = "로그인 아이디"
+        
         RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
-            .create(RetrofitService::class.java).loadDataFromServer()
+            .create(RetrofitService::class.java).loadProfileDataFromServer(datapart)
+            .enqueue(object : Callback<ProfileDBItem> {
+                override fun onResponse(call: Call<ProfileDBItem>, response: Response<ProfileDBItem>) {
+                    G.pic = response.body()!!.imgUrl
+                }
+
+                override fun onFailure(call: Call<ProfileDBItem>, t: Throwable) {
+                    Toast.makeText(requireContext(), "profileDB에서 사진만 불러오기 실패", Toast.LENGTH_SHORT).show()
+                }
+            })
+        
+        
+        
+        
+        // loadboardDB.php
+        RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
+            .create(RetrofitService::class.java).loadBoardDataFromServer()
             .enqueue(object : Callback<MutableList<BoardDBItem>> {
                 override fun onResponse(
                     call: Call<MutableList<BoardDBItem>>,
@@ -68,7 +87,7 @@ class BoardFragment: Fragment() {
 
                     response.body().let {
                         it?.forEach {
-                           items.add(0, BoardRecyclerItem(G.pic,it.id,G.plant,it.title ,it.text,it.file,it.date))
+                           items.add(0, BoardRecyclerItem(G.pic,it.name,G.plant,it.title ,it.text,it.file,it.date))
                             binding.recyclerView.adapter?.notifyItemInserted(0)
 
                         }
