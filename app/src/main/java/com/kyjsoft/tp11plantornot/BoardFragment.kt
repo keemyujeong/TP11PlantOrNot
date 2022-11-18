@@ -56,49 +56,28 @@ class BoardFragment: Fragment() {
         items.clear()
         binding.recyclerView.adapter?.notifyDataSetChanged()
 
-        var datapart : MutableMap<String, String> = HashMap()
-        datapart["id"] = "로그인 아이디"
-        
-        RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
-            .create(RetrofitService::class.java).loadProfileDataFromServer(datapart)
-            .enqueue(object : Callback<ProfileDBItem> {
-                override fun onResponse(call: Call<ProfileDBItem>, response: Response<ProfileDBItem>) {
-                    G.pic = response.body()!!.imgUrl
-                }
-
-                override fun onFailure(call: Call<ProfileDBItem>, t: Throwable) {
-                    Toast.makeText(requireContext(), "profileDB에서 사진만 불러오기 실패", Toast.LENGTH_SHORT).show()
-                }
-            })
-        
-        
-        
-        
         // loadboardDB.php
         RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
             .create(RetrofitService::class.java).loadBoardDataFromServer()
-            .enqueue(object : Callback<MutableList<BoardDBItem>> {
+            .enqueue(object : Callback<MutableList<BoardRecyclerItem>> {
                 override fun onResponse(
-                    call: Call<MutableList<BoardDBItem>>,
-                    response: Response<MutableList<BoardDBItem>>
+                    call: Call<MutableList<BoardRecyclerItem>>,
+                    response: Response<MutableList<BoardRecyclerItem>>
                 ) {
                     items.clear()
                     binding.recyclerView.adapter?.notifyDataSetChanged()
 
                     response.body().let {
                         it?.forEach {
-                           items.add(0, BoardRecyclerItem(G.pic,it.name,G.plant,it.title ,it.text,it.file,it.date))
+                           items.add(BoardRecyclerItem(it.imgurl,it.name,it.plant,it.title,it.text,it.file,it.date))
                             binding.recyclerView.adapter?.notifyItemInserted(0)
-
                         }
                     }
                 }
-
-                override fun onFailure(call: Call<MutableList<BoardDBItem>>, t: Throwable) {
+                override fun onFailure(call: Call<MutableList<BoardRecyclerItem>>, t: Throwable) {
                     Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
                     Log.i("TAG-B", t.message.toString())
                 }
-
             })
 
     }

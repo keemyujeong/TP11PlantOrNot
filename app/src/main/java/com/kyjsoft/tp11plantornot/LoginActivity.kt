@@ -27,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
             finish()
+
+            G.id = "로그인 아이디"
         }
 
 

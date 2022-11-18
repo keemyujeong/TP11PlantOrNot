@@ -24,9 +24,9 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        Glide.with(context).load("http://kyjsoft.dothome.co.kr/TPplantOrNot/"+items[position].imgUrl).error(R.drawable.profle).into(holder.binding.civ)
+        Glide.with(context).load("http://kyjsoft.dothome.co.kr/TPplantOrNot/"+items[position].imgurl).error(R.drawable.profle).into(holder.binding.civ)
         holder.binding.tvName.text = items[position].name
-        holder.binding.tvSelectplant.text = items[position].selectPlant
+        holder.binding.tvSelectplant.text = items[position].plant
         holder.binding.tvTitle.text = items[position].title
         holder.binding.tvText.text = items[position].text
         Glide.with(context).load("http://kyjsoft.dothome.co.kr/TPplantOrNot/"+items[position].file).error(R.drawable.profle).into(holder.binding.iv)

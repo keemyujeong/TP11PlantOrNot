@@ -128,8 +128,6 @@ class MapActivity : AppCompatActivity() {
         val intent : Intent = Intent(this, PickActivity::class.java)
         startActivity(intent)
 
-        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
-
         // 기상청 nx,ny json 파싱
         val weatherJsonStr : String = assets.open("jsons/weatherXY.json").bufferedReader().use { it.readText() }
 //        Log.i("TAG", weatherJsonStr)
@@ -148,9 +146,6 @@ class MapActivity : AppCompatActivity() {
 
 //                            Log.i("TAG", it.region2 + region_2depth_name)
 
-                            // SQLite에 정보 저장
-                            db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, location TEXT, nx TEXT, ny TEXT )")
-                            db.execSQL("INSERT INTO map(location, nx, ny) VALUES(?,?,?)", arrayOf(G.location, G.locationX, G.locationY))
                         }
                     }
                 }

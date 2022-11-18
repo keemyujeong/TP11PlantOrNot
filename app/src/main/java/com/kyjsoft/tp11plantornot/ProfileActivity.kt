@@ -2,6 +2,7 @@ package com.kyjsoft.tp11plantornot
 
 import android.content.Intent
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,7 +32,7 @@ import java.io.File
 class ProfileActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityProfileBinding
-    var imgUrl : String? = null
+    lateinit var profileimgUrl : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.civ.setOnClickListener { resultLauncher.launch(intent) }
 
-        binding.btn.setOnClickListener {clickBtn()}
+        binding.btn.setOnClickListener { insertProfileDB() }
 
     }
 
@@ -52,17 +53,16 @@ class ProfileActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if(result.resultCode == RESULT_OK) {
                 Glide.with(this).load(result.data?.data).error("").into(binding.civ)
-                imgUrl = getPathFromUri(result.data?.data)
+                profileimgUrl = getPathFromUri(result.data?.data)
 //                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
 
             }
         }
 
 
-    fun clickBtn(){
+    fun insertProfileDB(){
         G.name = binding.et.text.toString()
 
-        // TODO 한꺼번에 dothome서버에 저장 ( location 빼고 나머지 저장 )
         var datapart : MutableMap<String, String> = HashMap()
         datapart["id"] = "로그인 아이디"
         datapart["name"] = G.name
@@ -71,8 +71,8 @@ class ProfileActivity : AppCompatActivity() {
         val retrofit : Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
         val retrofitService = retrofit.create(RetrofitService::class.java)
         lateinit var filePart : MultipartBody.Part
-        imgUrl!!.let {
-            val file = File(imgUrl)
+        profileimgUrl!!.let {
+            val file = File(profileimgUrl)
             val requestBody = RequestBody.create(
                 MediaType.parse("image/*"),
                 file
@@ -92,13 +92,21 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        //TODO G.pic 전역 변수에 retrofit으로 profileDB로드한 이미지 값 가져오기
-
+        insertSQLite()
 
         startActivity(Intent(this, MainActivity::class.java))
         finish()
 
 
+    }
+
+    fun insertSQLite(){
+        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
+
+        db.execSQL("DROP TABLE map")
+        // SQLite에 정보 저장
+        db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, location TEXT, nx TEXT, ny TEXT )")
+        db.execSQL("INSERT INTO map(id, location, nx, ny) VALUES(?,?,?,?)", arrayOf(G.id, G.location, G.locationX, G.locationY))
     }
 
 

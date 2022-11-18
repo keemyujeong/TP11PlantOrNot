@@ -47,6 +47,7 @@ class HomeFragment: Fragment() {
         binding.tvLocation.text = G.location
         binding.myPlant.text = G.plant
         binding.myPlant2.text = G.plant
+        // TODO drawer header 글씨랑 이미지 바꾸기
 
         binding.nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId){

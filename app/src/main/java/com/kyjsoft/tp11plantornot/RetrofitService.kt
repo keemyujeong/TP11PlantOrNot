@@ -88,7 +88,7 @@ interface RetrofitService {
                               @Part filePart : MultipartBody.Part) : Call<String>
 
     @GET("TPplantOrNot/loadBoardDB.php")
-    fun loadBoardDataFromServer() : Call<MutableList<BoardDBItem>>
+    fun loadBoardDataFromServer() : Call<MutableList<BoardRecyclerItem>>
 
 
     // Dothome서버에 프로필 게시판
@@ -99,7 +99,7 @@ interface RetrofitService {
 
     @Multipart
     @POST("TPplantOrNot/loadProfileDB.php")
-    fun loadProfileDataFromServer(@PartMap dataPart : Map<String, String>) : Call<ProfileDBItem>
+    fun loadProfileDataToServer(@PartMap datrpart : Map<String, String>) : Call<MutableList<ProfileItem>>
 
 
     // Dothome서버에 좋아요 DB

@@ -84,28 +84,23 @@ data class HomeRecyclerItem(var title: String, var text: String)
 
 // 정보 공유 게시판
 data class BoardRecyclerItem (
-    var imgUrl: String, // 프로필 사진
+    var imgurl: String, // 프로필 사진
     var name: String,
-    var selectPlant : String, // 관심작물
+    var plant : String, // 관심작물
     var title : String,
     var text : String,
     var file : String, // 게시글 첨부 파일(사진)
     var date : String
 )
 
-data class BoardDBItem(
-    var boardno: Int,
-    var name: String,
-    var title : String,
-    var text : String,
-    var file : String, // 게시글 첨부 파일(사진)
-    var date: String
+// 내 프로필
+data class ProfileItem(
+    var no : String,
+    var id : String,
+    var imgurl : String,
+    var name : String,
+    var plant : String
 )
-
-data class ProfileDBItem(
-    var imgUrl : String
-)
-
 
 
 // 내가 쓴 글 관리
