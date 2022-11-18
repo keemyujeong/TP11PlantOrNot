@@ -1,5 +1,6 @@
 package com.kyjsoft.tp11plantornot
 
+import android.provider.ContactsContract
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
@@ -84,6 +85,7 @@ data class HomeRecyclerItem(var title: String, var text: String)
 
 // 정보 공유 게시판
 data class BoardRecyclerItem (
+    var boardno: Int,
     var imgurl: String, // 프로필 사진
     var name: String,
     var plant : String, // 관심작물
@@ -104,7 +106,21 @@ data class ProfileItem(
 
 
 // 내가 쓴 글 관리
-data class MyPostRecyclerItem (var title : String, var text : String, var howManyLike : Int)
+data class MyPostRecyclerItem (
+    var text : String,
+    var title : String,
+    var howManyLike : Int
+    )
+
+data class MypostJsonItem (
+    var data : MutableList<Data>,
+    var howManyLike : Int
+)
+data class Data(
+    var text: String,
+    var title : String
+)
+
 
 
 

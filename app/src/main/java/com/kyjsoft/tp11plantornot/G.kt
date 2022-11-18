@@ -10,5 +10,6 @@ class G {
         lateinit var pic : String
         lateinit var name : String
         lateinit var id : String
+
     }
 }

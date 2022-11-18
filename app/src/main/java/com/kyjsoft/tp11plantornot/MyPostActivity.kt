@@ -2,7 +2,13 @@ package com.kyjsoft.tp11plantornot
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import com.kyjsoft.tp11plantornot.databinding.ActivityMyPostBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class MyPostActivity : AppCompatActivity() {
 
@@ -17,20 +23,23 @@ class MyPostActivity : AppCompatActivity() {
         binding.recyclerView.adapter = MyPostAdapter(this, items)
         binding.iv.setOnClickListener { onBackPressed() }
 
+        var datapart : MutableMap<String, String> = HashMap()
+        datapart["id"] = "로그인 아이디"
 
-        // TODO MYSQL에서 해당 아이디의 제목,글,좋아요 갯수만 가져오면 됨.
-
-        items.add(MyPostRecyclerItem("왕감자","대홍단 왕감자",10))
-        items.add(MyPostRecyclerItem("왕감자","고구마 고구마 대홍단 왕감자",1))
-        items.add(MyPostRecyclerItem("왕감자","대홍단 왕감자",0))
-        items.add(MyPostRecyclerItem("왕감자","대홍단 왕감자",1))
-        items.add(MyPostRecyclerItem("왕감자","감자 감자 대홍단 왕감자",0))
-        items.add(MyPostRecyclerItem("왕감자","감자 대홍단 왕감자",1))
-        items.add(MyPostRecyclerItem("왕감자","대홍단 왕감자",0))
-        items.add(MyPostRecyclerItem("왕감자","고구마 감자 대홍단 왕감자",10))
-        items.add(MyPostRecyclerItem("왕감자","대홍단 왕감자",20))
-
-
+        val retrofit : Retrofit = RetrofitHelper.getInstance("http://kyjsoft.dothome.co.kr/")
+        retrofit.create(RetrofitService::class.java).loadMyPostDataFromServer(datapart)
+            .enqueue(object : Callback<MypostJsonItem> {
+                override fun onResponse( call: Call<MypostJsonItem>, response: Response<MypostJsonItem>) {
+                    response.body()!!.let {
+                        it.data.forEach {
+//                            MyPostRecyclerItem(it.text, it.title, howManyLike)
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<MypostJsonItem>, t: Throwable) {
+                    AlertDialog.Builder(this@MyPostActivity).setMessage(t.message).show()
+                }
+            })
 
     }
 

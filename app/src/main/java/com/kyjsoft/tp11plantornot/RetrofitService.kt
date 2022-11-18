@@ -104,8 +104,17 @@ interface RetrofitService {
 
     // Dothome서버에 좋아요 DB
     @Multipart
-    @POST("TPplantOrNot/loadLikeDB.php")
-    fun postLikeDataFromServer(@PartMap dataPart : Map<String, String>) : Call<String>
+    @POST("TPplantOrNot/insertLikeDB.php")
+    fun postLikeDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
+
+    @Multipart
+    @POST("TPplantOrNot/deleteLikeDB.php")
+    fun deleteLikeDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
+
+    // Dothome서버에 내가 쓴 글 관리
+    @Multipart
+    @POST("TPplantOrNot/loadMyPostDB.php")
+    fun loadMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<MypostJsonItem>
 
 
 

@@ -69,7 +69,7 @@ class BoardFragment: Fragment() {
 
                     response.body().let {
                         it?.forEach {
-                           items.add(BoardRecyclerItem(it.imgurl,it.name,it.plant,it.title,it.text,it.file,it.date))
+                           items.add(BoardRecyclerItem(it.boardno,it.imgurl,it.name,it.plant,it.title,it.text,it.file,it.date))
                             binding.recyclerView.adapter?.notifyItemInserted(0)
                         }
                     }
