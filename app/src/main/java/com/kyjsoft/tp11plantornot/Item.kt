@@ -109,17 +109,10 @@ data class ProfileItem(
 data class MyPostRecyclerItem (
     var text : String,
     var title : String,
-    var howManyLike : Int
+    var like_count : Int
     )
 
-data class MypostJsonItem (
-    var data : MutableList<Data>,
-    var howManyLike : Int
-)
-data class Data(
-    var text: String,
-    var title : String
-)
+
 
 
 

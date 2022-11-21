@@ -111,10 +111,11 @@ interface RetrofitService {
     @POST("TPplantOrNot/deleteLikeDB.php")
     fun deleteLikeDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
 
-    // Dothome서버에 내가 쓴 글 관리
+    // Dothome서버에 내가 쓴 글 관리(제목, 글)
     @Multipart
-    @POST("TPplantOrNot/loadMyPostDB.php")
-    fun loadMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<MypostJsonItem>
+    @POST("TPplantOrNot/loadMyBoardDB.php")
+    fun loadMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<MutableList<MyPostRecyclerItem>>
+
 
 
 

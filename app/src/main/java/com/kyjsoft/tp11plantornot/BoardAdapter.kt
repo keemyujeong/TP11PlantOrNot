@@ -45,7 +45,7 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
 
         init { // class 영역에서 함수 말고 실행문을 쓸 때 초기화 블럭 안에 써라.
 
-            //현재 클릭한 위치( position ) 얻어오기
+            // 현재 클릭한 위치( position ) 얻어오기
             binding.like.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
                 override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
                     if(p1){
@@ -66,9 +66,11 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
                                 AlertDialog.Builder(context).setMessage(t.message).show()
                             }
                         })
+
+
                     }else{
                         // 토글 false값 일때 처리
-                        // dothomeLikeDB에서 줄 삭제
+                        // dothomeLikeDB에서 줄 삭제 -> TODO 갯수 안 뜸
                         val item = items[adapterPosition]
                         var datapart : MutableMap<String, String> = HashMap()
                         datapart["boardno"] = "${item.boardno}"
@@ -82,9 +84,6 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
                                 override fun onFailure(call: Call<String>, t: Throwable) {
                                 }
                             })
-
-
-
 
                     }
                 }
