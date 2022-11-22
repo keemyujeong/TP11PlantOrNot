@@ -2,11 +2,16 @@ package com.kyjsoft.tp11plantornot
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kyjsoft.tp11plantornot.databinding.MyPostRecyclerItemBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyPostAdapter(val context: Context, var items : MutableList<MyPostRecyclerItem>) : RecyclerView.Adapter<MyPostAdapter.VH>() {
 
@@ -15,7 +20,25 @@ class MyPostAdapter(val context: Context, var items : MutableList<MyPostRecycler
 
         init {
             binding.btnDelete.setOnClickListener {
-                // MY DBSQL에서 해당 게시글 delete
+                // MY SQL에서 해당 게시글 delete
+                val item = items[adapterPosition]
+                Log.i("TAG", item.boardno.toString())
+
+                var datapart : MutableMap<String, String> = HashMap()
+                datapart["boardno"] = "${item.boardno}"
+
+                val retrofit = RetrofitHelper.getInstance("http://kyjsoft.dothome.co.kr/")
+                retrofit.create(RetrofitService::class.java)
+                    .deleteMyPostDataFromServer(datapart).enqueue(object : Callback<String> {
+                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                            (context as MyPostActivity).binding.recyclerView.adapter?.notifyDataSetChanged()
+                            context.loadData()
+
+                            Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                        }
+                    })
             }
             binding.btnUpdate.setOnClickListener { context.startActivity(Intent(context, EditActivity::class.java)) }
         }
@@ -32,7 +55,8 @@ class MyPostAdapter(val context: Context, var items : MutableList<MyPostRecycler
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.tvTitle.text = items.get(position).title
         holder.binding.tvText.text = items.get(position).text
-        holder.binding.howManyLike.text = items.get(position).howManyLike.toString()
+        holder.binding.tvDate.text = items[position].date
+        holder.binding.howManyLike.text = items.get(position).like_count.toString()
     }
 
     override fun getItemCount(): Int = items.size

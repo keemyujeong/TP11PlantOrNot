@@ -107,8 +107,10 @@ data class ProfileItem(
 
 // 내가 쓴 글 관리
 data class MyPostRecyclerItem (
-    var text : String,
+    var boardno : Int,
     var title : String,
+    var text : String,
+    var date : String,
     var like_count : Int
     )
 
