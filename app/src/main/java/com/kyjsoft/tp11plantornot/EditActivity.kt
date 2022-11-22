@@ -1,9 +1,6 @@
 package com.kyjsoft.tp11plantornot
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,9 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.ActivityEditBinding

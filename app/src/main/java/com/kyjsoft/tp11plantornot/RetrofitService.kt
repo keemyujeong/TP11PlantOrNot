@@ -49,38 +49,6 @@ interface RetrofitService {
 
 
 
-    // 병충해(TODO 실패! -> scalars로는 날아옴)
-    @GET("service?serviceCode=SVC01&serviceType=AA001")
-    fun getInsectData(
-        @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName : String = G.plant,
-        @Query("sickNameKor") sickNameKor : String,
-        ) : Call<Service>
-
-    @GET("service?serviceCode=SVC01&serviceType=AA001")
-    fun insectDataToString(
-        @Query("apiKey") apiKey: String,
-        @Query("cropName") cropName : String = G.plant,
-        @Query("sickNameKor") sickNameKor : String
-        ) : Call<String>
-
-
-
-    // 농작업일정( TODO 실패!)
-    @GET("service/farmWorkingPlanNew/workScheduleDt")
-    fun getPlantData(
-        @Query("cntntsNo") cntntsNo : Int,
-        @Query("apiKey") apiKey : String,
-        ) : Call<Response>
-
-    @GET("service/farmWorkingPlanNew/workScheduleDt")
-    fun PlantDataToString(
-        @Query("cntntsNo") cntntsNo : Int,
-        @Query("apiKey") apiKey : String,
-        ) : Call<String>
-
-
-
     // Dothome서버에 작성글 게시판
     @Multipart
     @POST("TPplantOrNot/insertBoardDB.php")
@@ -120,10 +88,6 @@ interface RetrofitService {
     @POST("TPplantOrNot/deleteMyBoardDB.php")
     fun deleteMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
 
-    // Dothome서버에 내가 쓴 글 관리(제목, 글)
-    @Multipart
-    @POST("TPplantOrNot/loadMyBoardDB.php")
-    fun loadMyPostDataFromServerToString(@PartMap dataPart: MutableMap<String, String>) : Call<String>
 
 
 

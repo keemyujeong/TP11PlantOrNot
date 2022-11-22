@@ -1,9 +1,5 @@
 package com.kyjsoft.tp11plantornot
 
-import android.provider.ContactsContract
-import com.tickaroo.tikxml.annotation.Element
-import com.tickaroo.tikxml.annotation.PropertyElement
-import com.tickaroo.tikxml.annotation.Xml
 
 // 기상청
 data class WeatherResponse(val response: Weather)
@@ -26,54 +22,8 @@ data class WeatherItem (
 )
 
 
-
-
-// 병충해(TODO 일단 스탑)
-@Xml(name = "service")
-data class Service(
-    @Element(name = "list")
-    val list : List
-)
-@Xml(name = "list")
-data class List(
-    @Element(name = "item")
-    val item: MutableList<InsectItem>
-)
-@Xml
-data class InsectItem(
-    @PropertyElement(name = "sickNameKor")
-    var insectKorName : String,
-    @PropertyElement(name = "oriImg")
-    var oriImg : String,
-    @PropertyElement(name = "cropName")
-    var cropName : String
-)
-
 // 병충해 파싱 정보
 data class BugRecyclerItem(var plantName : String, var InsectName : String, var bugImgUrl : String)
-
-
-
-
-// 농작업 정보(TODO 일단 스탑)
-@Xml(name = "response")
-data class Response(
-    @Element(name= "body")
-    val body : FarmBody
-)
-@Xml(name = "body")
-data class FarmBody(
-    @Element(name = "item")
-    val item: FarmItem
-)
-
-@Xml(name = "item")
-data class FarmItem(
-    @PropertyElement(name = "kidofcomdtySeCodeNm")
-    var kidofcomdtySeCodeNm : String,
-    @PropertyElement(name = "cn")
-    var cn : String
-)
 
 // 관심작물 선택
 data class PickRecyclerItem (var plant:String)

@@ -14,7 +14,6 @@ import com.kyjsoft.tp11plantornot.databinding.BoardRecyclerItemBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerItem>) : RecyclerView.Adapter<BoardAdapter.VH>() {
 

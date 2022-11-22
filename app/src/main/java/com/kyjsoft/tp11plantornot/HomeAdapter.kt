@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kyjsoft.tp11plantornot.databinding.HomeRecyclerItemBinding
-import com.kyjsoft.tp11plantornot.databinding.PickRecyclerItemBinding
+
+
+
+
 // context가 null일 수도 있기 때문에 물을표를 붙여야 homefragment에서 context를 알아들음 nullable로 인식함.
 class HomeAdapter(val context: Context?, var items: MutableList<HomeRecyclerItem>) : RecyclerView.Adapter<HomeAdapter.VH>() {
 

@@ -46,47 +46,11 @@ class PickActivity : AppCompatActivity() {
     }
 
     fun loadData(cntntsNo : Int) {
-        // TODO 더미데이터
+        // TODO xml 농작업 일정 파싱
         items.add(0,PickRecyclerItem("제발 떠라"))
 
         val baseUrl = "http://api.nongsaro.go.kr/"
         val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"
-        val retrofit : Retrofit = RetrofitHelper.getInstance(baseUrl)
-//        retrofit.create(RetrofitService::class.java).getPlantData(
-//            cntntsNo,
-//            apiKey,
-//        ).enqueue(object : Callback<Response> {
-//            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
-//
-//                val result: Response? = response.body()
-//                result?.body?.item?.let {
-//                    items.add(PickRecyclerItem(it.kidofcomdtySeCodeNm))
-//                    binding.recyclerView.adapter?.notifyDataSetChanged()
-//
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<Response>, t: Throwable) {
-//                AlertDialog.Builder(this@PickActivity).setMessage("실패 : ${t.message}").show()
-//            }
-//
-//        })
 
-        // scalars
-        retrofit.create(RetrofitService::class.java).PlantDataToString(
-            cntntsNo,
-            apiKey
-        ).enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.i("TAG-P", response.body().toString())
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("TAG-P", t.message.toString())
-                items.add(PickRecyclerItem("제발 떠라"))
-            }
-
-        })
     }
 }

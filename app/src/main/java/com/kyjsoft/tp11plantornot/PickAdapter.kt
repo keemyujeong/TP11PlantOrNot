@@ -1,16 +1,12 @@
 package com.kyjsoft.tp11plantornot
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.kyjsoft.tp11plantornot.databinding.ActivityPickBinding
 import com.kyjsoft.tp11plantornot.databinding.PickRecyclerItemBinding
-import java.util.zip.Inflater
 
 class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>): RecyclerView.Adapter<PickAdapter.VH>() {
 
