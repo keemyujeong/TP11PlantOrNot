@@ -3,6 +3,7 @@ package com.kyjsoft.tp11plantornot
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +19,6 @@ import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStream
 
 class MapActivity : AppCompatActivity() {
 
@@ -33,6 +33,10 @@ class MapActivity : AppCompatActivity() {
         val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
             requestPermissions(permissions, 100)
+        }else {
+            startActivity(Intent(this@MapActivity, MainActivity::class.java))
+            finish()
+            // 사용자가 권한을 허용만하고 앱을 꺼버리면 권한 설정만 되고 서버로 보낸 아이디나 프로필 같은 건 없는 것이 잖아?
         }
 
         val keyHash : String = Utility.getKeyHash(this@MapActivity)
@@ -43,6 +47,11 @@ class MapActivity : AppCompatActivity() {
         binding.search.setOnClickListener { input() }
         binding.btn.setOnClickListener { clickBtn() }
 
+        // sharedpreference로 기본값 false에 시작하기 버튼 누르면 true로 바뀌고 true면 intent로 처음 시작할때 설정 액티비티들 다 생략하도록 -> 인트로가 있어야하나?
+        val preferences : SharedPreferences = getSharedPreferences("initial setting", MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putBoolean("isfirst", false)
+        editor.commit()
 
     }
 //    fun input(){

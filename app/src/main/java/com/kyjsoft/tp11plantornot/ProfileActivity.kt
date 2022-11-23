@@ -40,7 +40,11 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.civ.setOnClickListener { resultLauncher.launch(intent) }
 
-        binding.btn.setOnClickListener { insertProfileDB() }
+        binding.btn.setOnClickListener {
+            G.name = binding.et.text.toString()
+            insertProfileDB()
+            Log.i("TAG-G", G.id + G.name + G.location + G.plant + G.pic)
+        }
 
     }
 
@@ -50,16 +54,18 @@ class ProfileActivity : AppCompatActivity() {
                 Glide.with(this).load(result.data?.data).error("").into(binding.civ)
                 profileimgUrl = getPathFromUri(result.data?.data)
 //                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
+                G.pic = profileimgUrl
 
             }
         }
 
 
     fun insertProfileDB(){
-        G.name = binding.et.text.toString()
+
+
 
         var datapart : MutableMap<String, String> = HashMap()
-        datapart["id"] = "로그인 아이디"
+        datapart["id"] = G.id
         datapart["name"] = G.name
         datapart["plant"] = G.plant
 
@@ -87,22 +93,13 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        insertSQLite()
-
         startActivity(Intent(this, MainActivity::class.java))
         finish()
 
 
     }
 
-    fun insertSQLite(){
-        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
 
-        db.execSQL("DROP TABLE map")
-        // SQLite에 정보 저장
-        db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, location TEXT, nx TEXT, ny TEXT )")
-        db.execSQL("INSERT INTO map(id, location, nx, ny) VALUES(?,?,?,?)", arrayOf(G.id, G.location, G.locationX, G.locationY))
-    }
 
 
 
@@ -117,7 +114,7 @@ class ProfileActivity : AppCompatActivity() {
 //    }
 
 
-    fun getPathFromUri(uri: Uri?): String { // TODO  여기 에러남
+    fun getPathFromUri(uri: Uri?): String {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(this, uri!!, proj, null, null, null)
         val cursor = loader.loadInBackground()

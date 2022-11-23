@@ -1,7 +1,10 @@
 package com.kyjsoft.tp11plantornot
 
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -60,10 +63,31 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        loadprofile()
+
+        Log.i("TAG", G.id+G.name+G.pic+G.plant+G.location)
+
+    }
+
+
+    fun loadprofile(){
+
+        // sqlite에서 사용자 정보 싹 불러와서 전역변수에 저장하기
+        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
+
+        val cursor = db.rawQuery("SELECT id, location FROM map ORDER BY num DESC LIMIT 1", null)
+
+        while(cursor.moveToNext()){
+            G.id = cursor.getString(0)
+            G.location = cursor.getString(1)
+        }
+
+
+
 
         // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
         var datapart: MutableMap<String, String> = HashMap()
-        datapart["id"] = "로그인 아이디"
+        datapart["id"] = G.id
 
         var retrofit: Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
         retrofit.create(RetrofitService::class.java).loadProfileDataToServer(
@@ -86,6 +110,11 @@ class MainActivity : AppCompatActivity() {
                 AlertDialog.Builder(this@MainActivity).setMessage(t.message).show()
             }
         })
+
+
+
+
+
 
     }
 }

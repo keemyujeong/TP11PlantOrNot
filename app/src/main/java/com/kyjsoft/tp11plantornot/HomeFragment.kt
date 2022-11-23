@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.kyjsoft.tp11plantornot.databinding.FragmentHomeBinding
+import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*
 import retrofit2.*
@@ -45,6 +48,9 @@ class HomeFragment: Fragment() {
         binding.myPlant.text = G.plant
         binding.myPlant2.text = G.plant
         // TODO drawer header 글씨랑 이미지 바꾸기
+        binding.nav.getHeaderView(0).findViewById<TextView>(R.id.tv).text = G.name
+        Glide.with(this@HomeFragment).load(G.pic).error(R.drawable.profle).into(binding.nav.getHeaderView(0).findViewById<CircleImageView>(R.id.civ))
+
 
         binding.nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId){

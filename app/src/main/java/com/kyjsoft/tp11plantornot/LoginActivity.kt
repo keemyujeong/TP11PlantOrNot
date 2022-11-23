@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kyjsoft.tp11plantornot.databinding.ActivityLoginBinding
@@ -25,14 +26,21 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.btn.setOnClickListener {
+            G.id = "로그인 아이디"
+
+            insertSQLite()
+
             startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
             finish()
 
-            G.id = "로그인 아이디"
         }
 
+    }
+    fun insertSQLite(){
+        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
 
-
-
+        // SQLite에 정보 저장
+        db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, location TEXT, nx TEXT, ny TEXT )")
+        db.execSQL("INSERT INTO map(id, location, nx, ny) VALUES(?,?,?,?)", arrayOf(G.id, G.location, G.locationX, G.locationY))
     }
 }
