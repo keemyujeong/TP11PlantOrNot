@@ -69,7 +69,6 @@ class BoardAdapter(val context: Context, var items : MutableList<BoardRecyclerIt
 
                     }else{
                         // 토글 false값 일때 처리
-                        // dothomeLikeDB에서 줄 삭제 -> TODO 갯수 안 뜸
                         val item = items[adapterPosition]
                         var datapart : MutableMap<String, String> = HashMap()
                         datapart["boardno"] = "${item.boardno}"

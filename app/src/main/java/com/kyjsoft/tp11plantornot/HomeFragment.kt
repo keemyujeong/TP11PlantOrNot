@@ -47,7 +47,6 @@ class HomeFragment: Fragment() {
         binding.tvLocation.text = G.location
         binding.myPlant.text = G.plant
         binding.myPlant2.text = G.plant
-        // TODO drawer header 글씨랑 이미지 바꾸기
         binding.nav.getHeaderView(0).findViewById<TextView>(R.id.tv).text = G.name
         Glide.with(this@HomeFragment).load(G.pic).error(R.drawable.profle).into(binding.nav.getHeaderView(0).findViewById<CircleImageView>(R.id.civ))
 
