@@ -54,9 +54,8 @@ class HomeFragment: Fragment() {
 
         binding.nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId){
-                R.id.menu_selectplant -> clickSelectPlant()
+                R.id.menu_setting -> clickLocation()
                 R.id.menu_post -> clickMyPost()
-                R.id.menu_location -> clickLocation()
             }
             binding.drawerId.closeDrawer(binding.nav)
             false
@@ -153,11 +152,6 @@ class HomeFragment: Fragment() {
 
     }
 
-    fun clickSelectPlant(){
-        val intent : Intent = Intent(requireContext(), PickActivity::class.java)
-        startActivity(intent)
-    }
-
     fun clickMyPost(){
         val intent : Intent = Intent(requireContext(), MyPostActivity::class.java)
         startActivity(intent)
@@ -166,6 +160,7 @@ class HomeFragment: Fragment() {
     fun clickLocation(){
         val intent : Intent = Intent(requireContext(), MapActivity::class.java)
         startActivity(intent)
+        // 이거 누르면
     }
 
     fun loadData(){
