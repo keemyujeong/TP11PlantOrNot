@@ -23,7 +23,7 @@ data class WeatherItem (
 
 
 // 병충해 파싱 정보
-data class BugRecyclerItem(var plantName : String, var InsectName : String, var bugImgUrl : String)
+data class BugRecyclerItem(var plantName : String?, var InsectName : String?, var bugImgUrl : String?)
 
 // 관심작물 선택
 data class PickRecyclerItem (var plant:String)
