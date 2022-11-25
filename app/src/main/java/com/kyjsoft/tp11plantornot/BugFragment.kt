@@ -38,6 +38,10 @@ class BugFragment: Fragment() {
             imm.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
 
             loadData()
+
+            binding.etPlant.isCursorVisible = false
+            binding.etInsect.isCursorVisible = false
+
         }
 
         binding.swipeRefresh.setOnRefreshListener {
@@ -49,14 +53,15 @@ class BugFragment: Fragment() {
 
     }
 
+
     fun loadData(){
         val baseUrl = "https://ncpms.rda.go.kr/npmsAPI/service?"
         val insectApiKey = "2022d5474582821a4f984e2b8988fecca95c"
         val address = baseUrl +
-                "apiKey=${insectApiKey}" +
                 "&serviceCode=SVC01&serviceType=AA001" +
-                "&cropName=" + binding.etPlant.text.toString() +
-                "&insectKorName=" + binding.etInsect.text.toString() + " "
+                "&apiKey=${insectApiKey}" +
+                "&cropName=" + binding.etPlant.text.toString() + "" +
+                "&sickNameKor=" + binding.etInsect.text.toString() + ""
 
         object : Thread(){
             override fun run() {

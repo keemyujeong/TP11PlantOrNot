@@ -1,9 +1,11 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.BugRecyclerItemBinding
@@ -12,6 +14,15 @@ class BugAdapter(var context : Context, var items : MutableList<BugRecyclerItem>
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding : BugRecyclerItemBinding = BugRecyclerItemBinding.bind(itemView)
+
+
+        init {
+            binding.ivBug.setOnClickListener {
+                var item = items[adapterPosition]
+                context.startActivity(Intent(context, BugInsertActivity::class.java).putExtra("bugImage",item.bugImgUrl))
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {

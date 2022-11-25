@@ -1,6 +1,7 @@
 package com.kyjsoft.tp11plantornot
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,11 @@ class LoginActivity : AppCompatActivity() {
             G.id = "로그인 아이디"
 
             insertSQLite()
+
+            // 아이디 얻어오면 sharedpreference로 저장하기
+            val preferences = getSharedPreferences("account", MODE_PRIVATE)
+            preferences.edit().putString("id", G.id).commit()
+
 
             startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
             finish()

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
@@ -16,9 +17,7 @@ import com.kakao.util.maps.helper.Utility
 import com.kyjsoft.tp11plantornot.databinding.ActivityMapBinding
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 
 class MapActivity : AppCompatActivity() {
 
@@ -30,14 +29,14 @@ class MapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+
         val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
             requestPermissions(permissions, 100)
-        }else {
-            startActivity(Intent(this@MapActivity, MainActivity::class.java))
-            finish()
-            // 사용자가 권한을 허용만하고 앱을 꺼버리면 권한 설정만 되고 서버로 보낸 아이디나 프로필 같은 건 없는 것이 잖아?
+        }else { // 권한 승인하면
         }
+
 
         val keyHash : String = Utility.getKeyHash(this@MapActivity)
         Log.i("TAG-keyHash", keyHash)
@@ -46,12 +45,6 @@ class MapActivity : AppCompatActivity() {
 
         binding.search.setOnClickListener { input() }
         binding.btn.setOnClickListener { clickBtn() }
-
-        // sharedpreference로 기본값 false에 시작하기 버튼 누르면 true로 바뀌고 true면 intent로 처음 시작할때 설정 액티비티들 다 생략하도록 -> 인트로가 있어야하나?
-        val preferences : SharedPreferences = getSharedPreferences("initial setting", MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.putBoolean("isfirst", false)
-        editor.commit()
 
     }
 //    fun input(){
@@ -76,6 +69,56 @@ class MapActivity : AppCompatActivity() {
 //            }
 //        })
 //    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if(requestCode==100){
+
+            val isfirst = getSharedPreferences("initialSetting", MODE_PRIVATE).getBoolean("isfirst",false) // 기본값 false main으로가면 true값으로
+
+            if(!isfirst){
+                // 애는 그냥 넘어가면서 절차 거쳐야지
+            }else{
+                G.id = getSharedPreferences("account", MODE_PRIVATE).getString("id","").toString()
+
+                // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
+                var datapart: MutableMap<String, String> = HashMap()
+                datapart["id"] = G.id
+
+                var retrofit: Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
+                retrofit.create(RetrofitService::class.java).loadProfileDataToServer(
+                    datapart
+                ).enqueue(object : Callback<MutableList<ProfileItem>> {
+                    override fun onResponse(
+                        call: Call<MutableList<ProfileItem>>,
+                        response: Response<MutableList<ProfileItem>>
+                    ) {
+                        response.body()!!.let {
+                            it.forEach {
+                                G.pic = it.imgurl
+                                G.name = it.name
+                                G.plant = it.plant
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
+                        AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()
+                        return;
+                    }
+                })
+                startActivity(Intent(this@MapActivity, MainActivity::class.java))
+                finish()
+            }
+        }else{
+            return;
+        }
+
+    }
 
 
     fun input(){

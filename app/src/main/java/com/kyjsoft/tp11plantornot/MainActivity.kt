@@ -65,7 +65,9 @@ class MainActivity : AppCompatActivity() {
 
         loadprofile()
 
-        Log.i("TAG", G.id+G.name+G.pic+G.plant+G.location)
+        getSharedPreferences("initialSetting", MODE_PRIVATE).edit().putBoolean("isfirst", true).commit()
+
+
 
     }
 
@@ -81,39 +83,6 @@ class MainActivity : AppCompatActivity() {
             G.id = cursor.getString(0)
             G.location = cursor.getString(1)
         }
-
-
-
-
-        // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
-        var datapart: MutableMap<String, String> = HashMap()
-        datapart["id"] = G.id
-
-        var retrofit: Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
-        retrofit.create(RetrofitService::class.java).loadProfileDataToServer(
-            datapart
-        ).enqueue(object : Callback<MutableList<ProfileItem>> {
-            override fun onResponse(
-                call: Call<MutableList<ProfileItem>>,
-                response: Response<MutableList<ProfileItem>>
-            ) {
-                response.body()!!.let {
-                    it.forEach {
-                        G.pic = it.imgurl
-                        G.name = it.name
-                        G.plant = it.plant
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
-                AlertDialog.Builder(this@MainActivity).setMessage(t.message).show()
-            }
-        })
-
-
-
-
 
 
     }
