@@ -35,6 +35,42 @@ class MapActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
             requestPermissions(permissions, 100)
         }else { // 권한 승인하면
+            val isfirst = getSharedPreferences("initialSetting", MODE_PRIVATE).getBoolean("isfirst", true) // 기본값 false main으로가면 true값으로
+            Log.i("TAG-isfirst", isfirst.toString())
+            if(isfirst){
+                // 애는 그냥 넘어가면서 절차 거쳐야지
+            }else{
+
+                G.id = getSharedPreferences("account", MODE_PRIVATE).getString("id","").toString()
+
+                // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
+                var datapart: MutableMap<String, String> = HashMap()
+                datapart["id"] = G.id
+
+                var retrofit: Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
+                retrofit.create(RetrofitService::class.java).loadProfileDataToServer(
+                    datapart
+                ).enqueue(object : Callback<MutableList<ProfileItem>> {
+                    override fun onResponse(
+                        call: Call<MutableList<ProfileItem>>,
+                        response: Response<MutableList<ProfileItem>>
+                    ) {
+                        response.body()!!.let {
+                            it.forEach {
+                                G.pic = it.imgurl
+                                G.name = it.name
+                                G.plant = it.plant
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
+                        AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()
+                        return;
+                    }
+                })
+                startActivity(Intent(this@MapActivity, MainActivity::class.java))
+                finish()
+            }
         }
 
 
@@ -79,42 +115,8 @@ class MapActivity : AppCompatActivity() {
 
         if(requestCode==100){
 
-            val isfirst = getSharedPreferences("initialSetting", MODE_PRIVATE).getBoolean("isfirst",false) // 기본값 false main으로가면 true값으로
-
-            if(!isfirst){
-                // 애는 그냥 넘어가면서 절차 거쳐야지
-            }else{
-                G.id = getSharedPreferences("account", MODE_PRIVATE).getString("id","").toString()
-
-                // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
-                var datapart: MutableMap<String, String> = HashMap()
-                datapart["id"] = G.id
-
-                var retrofit: Retrofit = RetrofitHelper.getInstance("Http://kyjsoft.dothome.co.kr")
-                retrofit.create(RetrofitService::class.java).loadProfileDataToServer(
-                    datapart
-                ).enqueue(object : Callback<MutableList<ProfileItem>> {
-                    override fun onResponse(
-                        call: Call<MutableList<ProfileItem>>,
-                        response: Response<MutableList<ProfileItem>>
-                    ) {
-                        response.body()!!.let {
-                            it.forEach {
-                                G.pic = it.imgurl
-                                G.name = it.name
-                                G.plant = it.plant
-                            }
-                        }
-                    }
-                    override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
-                        AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()
-                        return;
-                    }
-                })
-                startActivity(Intent(this@MapActivity, MainActivity::class.java))
-                finish()
-            }
         }else{
+            // 사용자가 허용 안함을 눌렀을때 그냥 꺼져버리도록
             return;
         }
 

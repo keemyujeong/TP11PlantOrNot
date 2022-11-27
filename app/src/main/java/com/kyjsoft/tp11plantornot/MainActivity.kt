@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
 
         loadprofile()
 
-        getSharedPreferences("initialSetting", MODE_PRIVATE).edit().putBoolean("isfirst", true).commit()
+        getSharedPreferences("initialSetting", MODE_PRIVATE).edit().putBoolean("isfirst", false).commit()
+
 
 
 
