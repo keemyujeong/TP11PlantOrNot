@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
@@ -62,6 +63,20 @@ class MapActivity : AppCompatActivity() {
                                 G.plant = it.plant
                             }
                         }
+
+                        // sqlite에서 사용자 정보 싹 불러와서 전역변수에 저장하기
+                        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
+
+                        val cursor = db.rawQuery("SELECT id, location, nx, ny FROM map ORDER BY num DESC LIMIT 1", null)
+
+                        while(cursor.moveToNext()){
+                            G.id = cursor.getString(0)
+                            G.location = cursor.getString(1)
+                            G.locationX = cursor.getString(2)
+                            G.locationY = cursor.getString(3)
+                        }
+
+                        Log.i("TAG-G",G.id + G.name + G.plant + G.location)
                     }
                     override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
                         AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()

@@ -63,27 +63,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        loadprofile()
-
         getSharedPreferences("initialSetting", MODE_PRIVATE).edit().putBoolean("isfirst", false).commit()
-
-
-
-
-    }
-
-
-    fun loadprofile(){
-
-        // sqlite에서 사용자 정보 싹 불러와서 전역변수에 저장하기
-        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
-
-        val cursor = db.rawQuery("SELECT id, location FROM map ORDER BY num DESC LIMIT 1", null)
-
-        while(cursor.moveToNext()){
-            G.id = cursor.getString(0)
-            G.location = cursor.getString(1)
-        }
 
 
     }

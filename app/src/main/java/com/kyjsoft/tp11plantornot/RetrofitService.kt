@@ -48,7 +48,6 @@ interface RetrofitService {
 
 
 
-
     // Dothome서버에 작성글 게시판
     @Multipart
     @POST("TPplantOrNot/insertBoardDB.php")
@@ -87,6 +86,14 @@ interface RetrofitService {
     @Multipart
     @POST("TPplantOrNot/deleteMyBoardDB.php")
     fun deleteMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
+
+
+    // homefragment 농작업 일정
+    @GET("service/farmWorkingPlanNew/workScheduleDt")
+    fun farmDataToString(
+        @Query("cntntsNo") cntntsNo : String,
+        @Query("apiKey") apiKey : String
+    ) : Call<String>
 
 
 

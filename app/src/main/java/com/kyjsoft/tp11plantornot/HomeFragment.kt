@@ -98,7 +98,7 @@ class HomeFragment: Fragment() {
         //SQLite에서 의 위치 값, nx, ny값
         val db : SQLiteDatabase = requireContext().openOrCreateDatabase("map", AppCompatActivity.MODE_PRIVATE, null)
 
-        val cursor = db.rawQuery("SELECT location,nx,ny FROM map WHERE num=?", arrayOf("0")) ?: return
+        val cursor = db.rawQuery("SELECT location, nx, ny FROM map WHERE num=?", arrayOf("0")) ?: return
 
         while(cursor.moveToNext()){
             G.locationX = cursor.getString(1)
@@ -163,6 +163,20 @@ class HomeFragment: Fragment() {
     }
 
     fun loadData(){
+
+        val apikey = "20221021WSJM62P0MYCVEVLK5V3FA"
+
+        RetrofitHelper.getInstance("http://api.nongsaro.go.kr/").create(RetrofitService::class.java)
+            .farmDataToString("30697", apikey).enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.i("TAG-FARM", response.body().toString())
+                }
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    AlertDialog.Builder(requireContext()).setMessage(t.message).show()
+                }
+            })
+
+
         // TODO html 파싱
 
 
