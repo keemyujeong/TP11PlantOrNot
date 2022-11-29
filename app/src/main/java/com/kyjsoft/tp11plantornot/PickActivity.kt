@@ -48,7 +48,7 @@ class PickActivity : AppCompatActivity() {
 
     fun loadData(cntntsNo : Int) {
         // TODO xml 농작업 일정 파싱
-        items.add(0,PickRecyclerItem("제발 떠라"))
+        items.add(0,PickRecyclerItem("딸기"))
 
         val baseUrl = "http://api.nongsaro.go.kr/"
         val apiKey = "20221021WSJM62P0MYCVEVLK5V3FA"

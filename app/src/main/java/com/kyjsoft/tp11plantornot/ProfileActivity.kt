@@ -43,7 +43,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             G.name = binding.et.text.toString()
             insertProfileDB()
+            insertSQLite()
             Log.i("TAG-G", G.id + G.name + G.location + G.plant + G.pic)
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
     }
@@ -55,14 +58,11 @@ class ProfileActivity : AppCompatActivity() {
                 profileimgUrl = getPathFromUri(result.data?.data)
 //                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
                 G.pic = profileimgUrl
-
             }
         }
 
 
     fun insertProfileDB(){
-
-
 
         var datapart : MutableMap<String, String> = HashMap()
         datapart["id"] = G.id
@@ -93,16 +93,16 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
-
 
     }
 
+    fun insertSQLite(){
+        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
 
-
-
-
+        // SQLite에 정보 저장
+        db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, location TEXT, nx TEXT, ny TEXT )")
+        db.execSQL("INSERT INTO map(id, location, nx, ny) VALUES(?,?,?,?)", arrayOf(G.id, G.location, G.locationX, G.locationY))
+    }
 
 //    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
 //

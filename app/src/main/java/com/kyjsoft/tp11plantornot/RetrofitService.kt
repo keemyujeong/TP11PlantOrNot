@@ -88,8 +88,8 @@ interface RetrofitService {
     fun deleteMyPostDataFromServer(@PartMap dataPart: MutableMap<String, String>) : Call<String>
 
 
-    // homefragment 농작업 일정
-    @GET("service/farmWorkingPlanNew/workScheduleDt")
+    // homefragment 농작업 일정 ( TODO 실패 )
+    @GET("service/farmWorkingPlanNew/workScheduleDtl")
     fun farmDataToString(
         @Query("cntntsNo") cntntsNo : String,
         @Query("apiKey") apiKey : String

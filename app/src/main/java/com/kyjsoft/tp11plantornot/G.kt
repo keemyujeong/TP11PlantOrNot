@@ -2,14 +2,14 @@ package com.kyjsoft.tp11plantornot
 
 class G {
     companion object{
-        lateinit var location : String
-        lateinit var locationX : String
-        lateinit var locationY : String
+        var location : String = ""
+        var locationX : String = ""
+        var locationY : String = ""
 
-        lateinit var plant : String
-        lateinit var pic : String
-        lateinit var name : String
-        lateinit var id : String
+        var plant : String = ""
+        var pic : String = ""
+        var name : String =""
+        var id : String = ""
 
     }
 }

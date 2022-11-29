@@ -16,10 +16,14 @@ import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.kyjsoft.tp11plantornot.databinding.FragmentHomeBinding
 import de.hdodenhof.circleimageview.CircleImageView
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import retrofit2.*
 import retrofit2.Response
+import java.io.InputStreamReader
+import java.net.URL
 
 class HomeFragment: Fragment() {
 
@@ -62,7 +66,7 @@ class HomeFragment: Fragment() {
 
         // 홈 fragment 리사이클러 adapter
         binding.recyclerView.adapter = HomeAdapter(activity, items)
-        loadData()
+        loadData("30697")
 
 
 
@@ -162,24 +166,56 @@ class HomeFragment: Fragment() {
         // 이거 누르면
     }
 
-    fun loadData(){
-
-        val apikey = "20221021WSJM62P0MYCVEVLK5V3FA"
-
-        RetrofitHelper.getInstance("http://api.nongsaro.go.kr/").create(RetrofitService::class.java)
-            .farmDataToString("30697", apikey).enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.i("TAG-FARM", response.body().toString())
-                }
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    AlertDialog.Builder(requireContext()).setMessage(t.message).show()
-                }
-            })
-
+    fun loadData(cntntsNo : String){
 
         // TODO html 파싱
 
+        val baseUrl = "http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleDtl?"
+        val apikey = "20221021WSJM62P0MYCVEVLK5V3FA"
+        val address = baseUrl +
+                "cntntsNo=" + cntntsNo +
+                "&apiKey=" + apikey
 
+        object : Thread() {
+            override fun run() {
+                var xpp = XmlPullParserFactory.newInstance().newPullParser()
+                xpp.setInput(InputStreamReader(URL(address).openStream()))
+
+                var eventType = xpp.eventType
+                var items :MutableMap<String, String> = mutableMapOf()
+                while (eventType!=XmlPullParser.END_DOCUMENT){
+                    when(eventType){
+                        XmlPullParser.START_DOCUMENT -> {}
+                        XmlPullParser.START_TAG -> {
+                            val tagName = xpp.name
+                            if(tagName == "item"){
+                                xpp.next()
+                                items.put("content", xpp.text)
+                            }else if(tagName == "cn"){
+                                xpp.next()
+                                items.put("content", xpp.text)
+                            }
+                        }
+                        XmlPullParser.TEXT -> {}
+                        XmlPullParser.END_DOCUMENT -> if(xpp.name=="item"){
+                            // 여기서 html 파싱
+                            Log.i("TAG", items["content"]!!)
+                        }
+                    }
+                }
+            }
+        }
+
+
+//        RetrofitHelper.getInstance("http://api.nongsaro.go.kr/").create(RetrofitService::class.java)
+//            .farmDataToString("30697", apikey).enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    Log.i("TAG-FARM", response.body().toString())
+//                }
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    AlertDialog.Builder(requireContext()).setMessage(t.message).show()
+//                }
+//            })
 
 
         items.add(HomeRecyclerItem("농사 주기","농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다.농작업 일정이다."))

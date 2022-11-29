@@ -84,7 +84,7 @@ class BugFragment: Fragment() {
                             val tagName = xpp.name
                             if (tagName == "item"){
                             }
-                            if(tagName == "thumbImg") {
+                            else if(tagName == "thumbImg") {
                                 xpp.next()
                                 item.put("bugImgUrl", xpp.text)
                             } else if(tagName == "cropName"){

@@ -42,7 +42,19 @@ class MapActivity : AppCompatActivity() {
                 // 애는 그냥 넘어가면서 절차 거쳐야지
             }else{
 
-                G.id = getSharedPreferences("account", MODE_PRIVATE).getString("id","").toString()
+                // sqlite에서 사용자 정보 싹 불러와서 전역변수에 저장하기
+                val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
+
+                val cursor = db.rawQuery("SELECT id, location, nx, ny FROM map ORDER BY num DESC LIMIT 1", null)
+
+                while(cursor.moveToNext()){
+                    G.id = cursor.getString(0)
+                    G.location = cursor.getString(1)
+                    G.locationX = cursor.getString(2)
+                    G.locationY = cursor.getString(3)
+                }
+
+                Log.i("TAG-G",G.id + G.name + G.plant + G.location)
 
                 // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
                 var datapart: MutableMap<String, String> = HashMap()
@@ -63,20 +75,6 @@ class MapActivity : AppCompatActivity() {
                                 G.plant = it.plant
                             }
                         }
-
-                        // sqlite에서 사용자 정보 싹 불러와서 전역변수에 저장하기
-                        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
-
-                        val cursor = db.rawQuery("SELECT id, location, nx, ny FROM map ORDER BY num DESC LIMIT 1", null)
-
-                        while(cursor.moveToNext()){
-                            G.id = cursor.getString(0)
-                            G.location = cursor.getString(1)
-                            G.locationX = cursor.getString(2)
-                            G.locationY = cursor.getString(3)
-                        }
-
-                        Log.i("TAG-G",G.id + G.name + G.plant + G.location)
                     }
                     override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
                         AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()
@@ -203,17 +201,15 @@ class MapActivity : AppCompatActivity() {
                         if(it.region2 == region_2depth_name){ // 기상청 주소지랑 카카오 로컬이랑 맞는지
                             G.locationX = it.nx
                             G.locationY = it.ny
-                            Log.i("TAG-location", G.locationX + G.locationY)
-                            Log.i("TAG-location", location)
-                            Log.i("TAG-location", G.location)
+                            Log.i("TAG-location", G.location + location + G.locationX + G.locationY)
+                            finish()
 
 //                            Log.i("TAG", it.region2 + region_2depth_name)
-
                         }
                     }
                 }
             }
         }
-        finish()
+
     }
 };

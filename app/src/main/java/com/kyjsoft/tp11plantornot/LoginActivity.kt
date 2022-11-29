@@ -29,24 +29,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             G.id = "로그인 아이디"
 
-            insertSQLite()
-
-            // 아이디 얻어오면 sharedpreference로 저장하기
-            val preferences = getSharedPreferences("account", MODE_PRIVATE)
-            preferences.edit().putString("id", G.id).commit()
-
-
             startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
             finish()
 
         }
 
-    }
-    fun insertSQLite(){
-        val db : SQLiteDatabase = openOrCreateDatabase("map", MODE_PRIVATE, null)
-
-        // SQLite에 정보 저장
-        db.execSQL("CREATE TABLE IF NOT EXISTS map( num INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT, location TEXT, nx TEXT, ny TEXT )")
-        db.execSQL("INSERT INTO map(id, location, nx, ny) VALUES(?,?,?,?)", arrayOf(G.id, G.location, G.locationX, G.locationY))
     }
 }
