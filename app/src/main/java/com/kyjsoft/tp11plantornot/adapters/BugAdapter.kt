@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kyjsoft.tp11plantornot.R
+import com.kyjsoft.tp11plantornot.activities.BugInsertActivity
 import com.kyjsoft.tp11plantornot.databinding.BugRecyclerItemBinding
+import com.kyjsoft.tp11plantornot.model.BugRecyclerItem
 
 class BugAdapter(var context : Context, var items : MutableList<BugRecyclerItem>) : RecyclerView.Adapter<BugAdapter.VH>() {
 

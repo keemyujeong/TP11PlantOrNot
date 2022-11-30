@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
+import com.kyjsoft.tp11plantornot.adapters.PickAdapter
 import com.kyjsoft.tp11plantornot.databinding.ActivityPickBinding
+import com.kyjsoft.tp11plantornot.model.PickRecyclerItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

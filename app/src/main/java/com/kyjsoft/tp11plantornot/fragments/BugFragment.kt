@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.kyjsoft.tp11plantornot.adapters.BugAdapter
 import com.kyjsoft.tp11plantornot.databinding.FragmentBugBinding
+import com.kyjsoft.tp11plantornot.model.BugRecyclerItem
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader

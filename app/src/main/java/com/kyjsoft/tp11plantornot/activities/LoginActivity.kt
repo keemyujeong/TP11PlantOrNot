@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kyjsoft.tp11plantornot.databinding.ActivityLoginBinding
+import com.kyjsoft.tp11plantornot.model.G
 
 
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +25,22 @@ class LoginActivity : AppCompatActivity() {
 //        binding.buttonOAuthLoginImg.setOAuthLogin(launcher, oauthLoginCallback)
 
 
+        // 회원가입
+        binding.tvSignup.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+        }
+
+        binding.layoutEmail.setOnClickListener {
+            startActivity((Intent(this@LoginActivity, EmailLoginActivity::class.java)))
+        }
+
+        // 간편 로그인 버튼
+        binding.btnLoginGoogle.setOnClickListener { clickedLoginGoogle() }
+        binding.btnLoginKakao.setOnClickListener { clickedLoginKakao() }
+        binding.btnLoginNaver.setOnClickListener { clickedLoginNaver() }
+
+
+
 
 
         binding.btn.setOnClickListener {
@@ -35,4 +52,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    fun clickedLoginNaver(){
+
+    }
+    fun clickedLoginKakao(){
+
+    }
+    fun clickedLoginGoogle(){
+
+    }
+
 }

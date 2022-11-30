@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.model
 
 import okhttp3.MultipartBody
 import retrofit2.Call

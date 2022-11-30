@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.Manifest
 import android.content.Context
@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.kakao.util.maps.helper.Utility
 import com.kyjsoft.tp11plantornot.databinding.ActivityMapBinding
+import com.kyjsoft.tp11plantornot.model.*
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import retrofit2.*
@@ -54,8 +55,6 @@ class MapActivity : AppCompatActivity() {
                     G.locationY = cursor.getString(3)
                 }
 
-                Log.i("TAG-G",G.id + G.name + G.plant + G.location)
-
                 // 서버에 있는 프로필을 한 번 싹 전역변수에 저장하기.
                 var datapart: MutableMap<String, String> = HashMap()
                 datapart["id"] = G.id
@@ -73,16 +72,20 @@ class MapActivity : AppCompatActivity() {
                                 G.pic = it.imgurl
                                 G.name = it.name
                                 G.plant = it.plant
+                                Log.i("TAG-G1",G.id+" " + G.pic+" "  + G.name+" " + G.plant+" " + G.location)
+                                startActivity(Intent(this@MapActivity, MainActivity::class.java))
+                                finish()
                             }
                         }
+
                     }
                     override fun onFailure(call: Call<MutableList<ProfileItem>>, t: Throwable) {
                         AlertDialog.Builder(this@MapActivity).setMessage("서버 정보를 불러올 수 없습니다.").show()
                         return;
                     }
                 })
-                startActivity(Intent(this@MapActivity, MainActivity::class.java))
-                finish()
+
+
             }
         }
 

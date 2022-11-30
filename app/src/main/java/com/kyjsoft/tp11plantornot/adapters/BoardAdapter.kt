@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.adapters
 
 import android.content.Context
 import android.util.Log
@@ -10,7 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kyjsoft.tp11plantornot.R
 import com.kyjsoft.tp11plantornot.databinding.BoardRecyclerItemBinding
+import com.kyjsoft.tp11plantornot.model.BoardRecyclerItem
+import com.kyjsoft.tp11plantornot.model.RetrofitHelper
+import com.kyjsoft.tp11plantornot.model.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

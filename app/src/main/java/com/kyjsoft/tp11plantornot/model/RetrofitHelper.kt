@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

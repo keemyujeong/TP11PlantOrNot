@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kyjsoft.tp11plantornot.R
+import com.kyjsoft.tp11plantornot.activities.LoginActivity
 import com.kyjsoft.tp11plantornot.databinding.PickRecyclerItemBinding
+import com.kyjsoft.tp11plantornot.model.G
+import com.kyjsoft.tp11plantornot.model.PickRecyclerItem
 
 class PickAdapter(val context: Context, var items: MutableList<PickRecyclerItem>): RecyclerView.Adapter<PickAdapter.VH>() {
 

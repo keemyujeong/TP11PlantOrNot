@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.content.Intent
 
@@ -14,6 +14,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.kyjsoft.tp11plantornot.databinding.ActivityProfileBinding
+import com.kyjsoft.tp11plantornot.model.G
+import com.kyjsoft.tp11plantornot.model.RetrofitHelper
+import com.kyjsoft.tp11plantornot.model.RetrofitService
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

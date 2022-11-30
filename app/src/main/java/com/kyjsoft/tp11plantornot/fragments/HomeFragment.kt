@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.fragments
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
@@ -14,7 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.kyjsoft.tp11plantornot.R
+import com.kyjsoft.tp11plantornot.activities.MapActivity
+import com.kyjsoft.tp11plantornot.activities.MyPostActivity
+import com.kyjsoft.tp11plantornot.adapters.HomeAdapter
 import com.kyjsoft.tp11plantornot.databinding.FragmentHomeBinding
+import com.kyjsoft.tp11plantornot.model.*
 import de.hdodenhof.circleimageview.CircleImageView
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
@@ -43,6 +48,7 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i("TAG-Ghome", G.id+" " + G.pic+" "  + G.name+" " + G.plant+" " + G.location)
 
         // 메뉴 토글
         drawerToggle = ActionBarDrawerToggle(requireActivity(), binding.drawerId, binding.toolbar, R.string.drawer_open, R.string.drawer_close)

@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.kyjsoft.tp11plantornot.R
+import com.kyjsoft.tp11plantornot.activities.EditActivity
+import com.kyjsoft.tp11plantornot.activities.MyPostActivity
 import com.kyjsoft.tp11plantornot.databinding.MyPostRecyclerItemBinding
+import com.kyjsoft.tp11plantornot.model.MyPostRecyclerItem
+import com.kyjsoft.tp11plantornot.model.RetrofitHelper
+import com.kyjsoft.tp11plantornot.model.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

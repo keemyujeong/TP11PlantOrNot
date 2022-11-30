@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.kyjsoft.tp11plantornot.R
 import com.kyjsoft.tp11plantornot.databinding.ActivityMainBinding
+import com.kyjsoft.tp11plantornot.fragments.BoardFragment
+import com.kyjsoft.tp11plantornot.fragments.BugFragment
+import com.kyjsoft.tp11plantornot.fragments.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

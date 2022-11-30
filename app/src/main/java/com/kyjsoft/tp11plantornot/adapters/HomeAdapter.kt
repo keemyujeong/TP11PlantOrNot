@@ -1,13 +1,13 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kyjsoft.tp11plantornot.R
 import com.kyjsoft.tp11plantornot.databinding.HomeRecyclerItemBinding
-
-
+import com.kyjsoft.tp11plantornot.model.HomeRecyclerItem
 
 
 // context가 null일 수도 있기 때문에 물을표를 붙여야 homefragment에서 context를 알아들음 nullable로 인식함.

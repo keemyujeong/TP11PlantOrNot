@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

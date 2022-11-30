@@ -1,4 +1,4 @@
-package com.kyjsoft.tp11plantornot
+package com.kyjsoft.tp11plantornot.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.kyjsoft.tp11plantornot.activities.EditActivity
+import com.kyjsoft.tp11plantornot.adapters.BoardAdapter
 import com.kyjsoft.tp11plantornot.databinding.FragmentBoardBinding
+import com.kyjsoft.tp11plantornot.model.BoardRecyclerItem
+import com.kyjsoft.tp11plantornot.model.RetrofitHelper
+import com.kyjsoft.tp11plantornot.model.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
