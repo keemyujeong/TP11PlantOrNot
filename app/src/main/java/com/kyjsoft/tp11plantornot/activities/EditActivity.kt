@@ -28,7 +28,7 @@ import java.io.File
 class EditActivity : AppCompatActivity() {
 
     val binding : ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
-    lateinit var filePath : String
+    var filePath : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +104,7 @@ class EditActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Toast.makeText(this@EditActivity, "실패 ㅋㅋ", Toast.LENGTH_SHORT).show()
+                Log.i("TAG-result", t.message.toString())
             }
 
         })
