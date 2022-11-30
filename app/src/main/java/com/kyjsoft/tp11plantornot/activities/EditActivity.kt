@@ -28,7 +28,7 @@ import java.io.File
 class EditActivity : AppCompatActivity() {
 
     val binding : ActivityEditBinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
-    var filePath : String = ""
+    lateinit var filePath : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
