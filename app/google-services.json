@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "805096004895",
+    "project_id": "tp11plantornot",
+    "storage_bucket": "tp11plantornot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805096004895:android:1dd5eb2a7de3caf53ba42a",
+        "android_client_info": {
+          "package_name": "com.kyjsoft.tp11plantornot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805096004895-6c75b7vulihh94mb5gt9kpvta6kp5l38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpq2aMoIyMSEsH3HawZeEuvFQYCwx2v2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805096004895-6c75b7vulihh94mb5gt9kpvta6kp5l38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
