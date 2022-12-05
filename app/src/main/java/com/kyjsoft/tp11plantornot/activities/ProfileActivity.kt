@@ -56,7 +56,7 @@ class ProfileActivity : AppCompatActivity() {
 
     var resultLauncher : ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if(result.resultCode == RESULT_OK) {
+            if(result.resultCode != RESULT_CANCELED) {
                 Glide.with(this).load(result.data?.data).error("").into(binding.civ)
                 profileimgUrl = getPathFromUri(result.data?.data)
 //                Toast.makeText(this@ProfileActivity, ""+imgUrl, Toast.LENGTH_SHORT).show()
