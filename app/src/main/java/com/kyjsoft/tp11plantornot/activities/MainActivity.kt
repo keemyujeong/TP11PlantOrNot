@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     var fragments : MutableList<Fragment?> = mutableListOf()
     val fragmentManager : FragmentManager by lazy { supportFragmentManager }
 
+//    TODO 전제적으로 내 정보 관리에서 초기설정이아닌 설정 수정일때 클릭이벤트 달리하는 코드를 써야함.
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

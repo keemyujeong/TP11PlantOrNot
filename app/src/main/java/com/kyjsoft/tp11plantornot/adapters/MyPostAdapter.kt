@@ -46,7 +46,10 @@ class MyPostAdapter(val context: Context, var items : MutableList<MyPostRecycler
                         }
                     })
             }
-            binding.btnUpdate.setOnClickListener { context.startActivity(Intent(context, EditActivity::class.java)) }
+            binding.btnUpdate.setOnClickListener {
+                // TODO 내가쓴글의 해당 제목이랑 내용 첨부파일 intent로 보내야함.
+                context.startActivity(Intent(context, EditActivity::class.java))
+            }
         }
 
 

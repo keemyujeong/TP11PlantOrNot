@@ -144,6 +144,9 @@ class MapActivity : AppCompatActivity() {
         val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
+
+//      TODO 주소값 잘못쓰면 앱 꺼짐
+
         var retrofit = RetrofitHelper.getInstance("https://dapi.kakao.com/")
         retrofit.create(RetrofitService::class.java).getKakaoAddress(
             "KakaoAK 14cec1c2faa0d112976ce952cbf71665",
