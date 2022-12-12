@@ -96,6 +96,14 @@ data class Address(
 )
 
 
+data class AndroidDeveloper(
+    val nickname: String,
+    val name : String,
+    val dateOfBirth : String,
+    val phoneCall : String,
+    val Email : String,
+)
+
 
 
 

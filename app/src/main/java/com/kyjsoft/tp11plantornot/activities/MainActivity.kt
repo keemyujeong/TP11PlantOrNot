@@ -13,6 +13,7 @@ import com.kyjsoft.tp11plantornot.databinding.ActivityMainBinding
 import com.kyjsoft.tp11plantornot.fragments.BoardFragment
 import com.kyjsoft.tp11plantornot.fragments.BugFragment
 import com.kyjsoft.tp11plantornot.fragments.HomeFragment
+import com.kyjsoft.tp11plantornot.model.AndroidDeveloper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,4 +74,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+
+
+
+
 }
