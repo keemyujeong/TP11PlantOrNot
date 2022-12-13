@@ -26,13 +26,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         // 회원가입
-        binding.tvSignup.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
-        }
-
-        binding.layoutEmail.setOnClickListener {
-            startActivity((Intent(this@LoginActivity, EmailLoginActivity::class.java)))
-        }
+//        binding.tvSignup.setOnClickListener {
+//            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+//        }
+//
+//        binding.layoutEmail.setOnClickListener {
+//            startActivity((Intent(this@LoginActivity, EmailLoginActivity::class.java)))
+//        }
 
         // 간편 로그인 버튼
         binding.btnLoginGoogle.setOnClickListener { clickedLoginGoogle() }

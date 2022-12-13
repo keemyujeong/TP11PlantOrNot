@@ -76,6 +76,7 @@ class HomeFragment: Fragment() {
 
 
 
+
         // 날씨 적용
         val weatherApiKey = "4wlFPuoi69Pc78kZpfF7GpieaLhqRkeSrKZs9jk5ZqbKSSh4vfl2VXk36YbHSOSipfsuVFbBZk9wVLg+ubgvHw=="
         var retrofit : Retrofit = RetrofitHelper.getInstance("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/")
@@ -167,9 +168,14 @@ class HomeFragment: Fragment() {
     }
 
     fun clickLocation(){
+
+        requireContext().getSharedPreferences("initialSetting", AppCompatActivity.MODE_PRIVATE).edit().putBoolean("isfirst", true).commit()
+
         val intent : Intent = Intent(requireContext(), MapActivity::class.java)
         startActivity(intent)
-        // 이거 누르면
+
+        // TODO 이거 누르면 내 설정 다시하기
+
     }
 
     fun loadData(cntntsNo : String){
